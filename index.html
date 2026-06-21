@@ -12,20 +12,20 @@ background:#0b0f1a;
 color:white;
 }
 
+/* TOP */
 .topbar{
 display:flex;
 justify-content:space-between;
-align-items:center;
 padding:15px;
 background:#11182a;
 position:sticky;
 top:0;
+z-index:10;
 }
 
 .logo{
 color:orange;
 font-weight:bold;
-font-size:20px;
 }
 
 .menu button{
@@ -36,46 +36,29 @@ border-radius:10px;
 background:#1b2440;
 color:white;
 cursor:pointer;
-transition:0.3s;
 }
 
 .menu button:hover{
 background:orange;
-transform:scale(1.05);
 }
 
-.page{display:none;padding:20px;animation:fade .5s ease;}
+/* PAGES */
+.page{display:none;padding:20px;}
 .active{display:block;}
 
-@keyframes fade{
-from{opacity:0;transform:translateY(10px);}
-to{opacity:1;}
-}
-
-.glow{
-font-size:42px;
-background:linear-gradient(90deg,orange,red,purple,blue,green);
--webkit-background-clip:text;
-color:transparent;
-}
-
+/* CARDS */
 .card{
 background:#141c33;
 padding:15px;
 border-radius:15px;
 margin-top:10px;
-transition:0.3s;
 }
 
-.card:hover{
-transform:scale(1.03);
-}
-
+/* SHOP */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:10px;
-margin-top:15px;
 }
 
 .cats button{
@@ -88,14 +71,10 @@ border-radius:10px;
 cursor:pointer;
 }
 
-.cats button:hover{
-background:orange;
-}
+.cats button:hover{background:orange;}
 
-.profile{
-display:flex;
-gap:20px;
-}
+/* PROFILE */
+.profile{display:flex;gap:20px;}
 
 .sidebar{
 width:220px;
@@ -109,11 +88,6 @@ width:60px;
 height:60px;
 border-radius:10px;
 background:linear-gradient(45deg,orange,purple,blue,green,red);
-animation:spin 6s linear infinite;
-}
-
-@keyframes spin{
-100%{transform:rotate(360deg);}
 }
 
 .main{
@@ -138,19 +112,15 @@ padding:10px;
 background:#1b2440;
 border-radius:10px;
 cursor:pointer;
-transition:0.3s;
 }
 
-.actions div:hover{
-background:orange;
-transform:translateX(5px);
-}
+.actions div:hover{background:orange;}
 
+/* MODAL */
 .modal{
 display:none;
 position:fixed;
-top:0;
-left:0;
+top:0;left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,0.7);
@@ -169,6 +139,7 @@ width:300px;
 
 <body>
 
+<!-- TOP -->
 <div class="topbar">
 <div class="logo">🔥 WellyFun</div>
 
@@ -184,9 +155,9 @@ width:300px;
 
 <!-- HOME -->
 <section id="home" class="page active">
-<h1 class="glow">Добро пожаловать на WellyFun</h1>
+<h1>Добро пожаловать</h1>
 <div class="card">
-<p>Анархия SMP сервер</p>
+<p>Анархия SMP</p>
 <p>Орбитальные пушки</p>
 </div>
 </section>
@@ -198,6 +169,7 @@ width:300px;
 <button onclick="filter('all')">Все</button>
 <button onclick="filter('vip')">Привилегии</button>
 <button onclick="filter('res')">Ресурсы</button>
+<button onclick="filter('orb')">Пушки</button>
 <button onclick="filter('other')">Разное</button>
 </div>
 
@@ -229,6 +201,7 @@ width:300px;
 <div class="sidebar">
 <div class="skin"></div>
 <h3 id="nick">Player</h3>
+
 <button onclick="editNick()">Редактировать</button>
 <button onclick="topUp()">Пополнить</button>
 <button onclick="historyF()">История</button>
@@ -236,14 +209,13 @@ width:300px;
 </div>
 
 <div class="main">
-
-<h2>Личный кабинет</h2>
+<h2>Профиль</h2>
 
 <div class="profile-card">
 <div class="skin"></div>
 <div>
 <h3 id="username">Player</h3>
-<p>Профиль игрока</p>
+<p>Игрок</p>
 </div>
 </div>
 
@@ -256,10 +228,7 @@ width:300px;
 <section id="auth" class="page">
 <h2>Вход</h2>
 
-<input
-
-
-"email" placeholder="Email">
+<input id="email" placeholder="Email">
 <input id="pass" placeholder="Пароль">
 
 <h3>Регистрация</h3>
@@ -276,9 +245,12 @@ width:300px;
 <div class="box">
 <h3 id="mname"></h3>
 <p id="mdesc"></p>
-<p id="mprice"></p>
+<p
 
-<button onclick="buy()">Перейти к оплате</button>
+
+d="mprice"></p>
+
+<button onclick="buy()">Оплатить</button>
 <button onclick="closeModal()">Закрыть</button>
 </div>
 </div>
@@ -287,7 +259,7 @@ width:300px;
 let user=null;
 let current=null;
 
-/* SHOP ITEMS */
+/* ITEMS */
 let items=[
 {name:"VIP",price:59,type:"vip",desc:"База"},
 {name:"Winner",price:499,type:"vip",desc:"Флай"},
@@ -297,11 +269,13 @@ let items=[
 {name:"Разбан",price:199,type:"other",desc:"Снятие бана"}
 ];
 
+/* TAB */
 function tab(id){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
+/* SHOP */
 function render(type="all"){
 let box=document.getElementById("items");
 box.innerHTML="";
@@ -333,8 +307,9 @@ function closeModal(){
 document.getElementById("modal").style.display="none";
 }
 
+/* BUY */
 function buy(){
-alert("Переход к оплате");
+alert("Здесь будет оплата (FreeKassa / Stripe)");
 }
 
 /* CHAT */
@@ -371,7 +346,7 @@ document.getElementById("username").innerText=n;
 alert("Регистрация успешна");
 }
 
-/* PROFILE BUTTONS */
+/* PROFILE ACTIONS */
 function editNick(){
 let n=prompt("Новый ник:");
 if(n){
@@ -380,20 +355,22 @@ document.getElementById("username").innerText=n;
 }
 }
 
-function topUp(){
-alert("Пополнение пока не подключено");
-}
-
-function historyF(){
-alert("История покупок (пока нет базы)");
-}
-
-function settings(){
-alert("Настройки профиля (скоро)");
-}
+function topUp(){alert("Пополнение позже");}
+function historyF(){alert("История позже");}
+function settings(){alert("Настройки позже");}
 </script>
 
 </body>
-</html> id=
+</html> i
 
 
+
+
+
+Новый интерфейс!Новый интерфейс! Появились папки и фоны. А знаете, что ещё?
+Все
+Непрочитанные
+Архив
+Бизнес-уведомления
+Beastik Be
+Beastik Be
