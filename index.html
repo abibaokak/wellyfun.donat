@@ -3,23 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WellyFun - Premium Shop</title>
+<title>WellyFun Store</title>
 
 <style>
 body{
 margin:0;
 font-family:Arial;
-background:#0b0b12;
-color:white;
+background:#f5f6fb;
+color:#111;
 }
 
 /* HEADER */
 header{
-background:linear-gradient(90deg,#7b2ff7,#f9a825,#ff6a00);
-padding:25px;
+background:linear-gradient(90deg,#7b2ff7,#f9a825,#ff8a50);
+padding:28px;
 text-align:center;
-font-size:34px;
+font-size:36px;
 font-weight:bold;
+color:white;
+letter-spacing:1px;
 }
 
 /* NAV */
@@ -29,139 +31,205 @@ flex-wrap:wrap;
 justify-content:center;
 gap:10px;
 padding:15px;
+background:white;
+position:sticky;
+top:0;
+z-index:10;
+border-bottom:1px solid #eee;
 }
 
 .nav button{
 padding:12px 16px;
 border:none;
 border-radius:12px;
+background:#f3f4f8;
 cursor:pointer;
-background:#1c1c2e;
-color:white;
 font-weight:bold;
 transition:0.3s;
+font-size:16px;
 }
 
 .nav button:hover{
-transform:scale(1.1);
+transform:scale(1.08);
 background:#7b2ff7;
+color:white;
 }
 
 /* PAGE */
-.page{display:none;padding:25px;}
-.page.active{display:block;}
-
-/* TITLE */
-h1,h2{
-font-size:36px;
+.page{
+display:none;
+padding:25px;
 }
 
-.purple{color:#b388ff;}
-.yellow{color:#ffd54f;}
+.page.active{
+display:block;
+animation:fade 0.3s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* TITLES */
+.big{
+font-size:34px;
+font-weight:bold;
+}
+
+.purple{color:#7b2ff7;}
+.yellow{color:#f9a825;}
 .orange{color:#ff8a50;}
 
-/* AUTH */
-.auth{
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.7);
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:999;
-}
-
-.auth-box{
-background:#111;
+/* INFO BLOCK */
+.infoBox{
+background:white;
 padding:20px;
 border-radius:14px;
-width:300px;
+border:1px solid #eee;
+font-size:20px;
+line-height:1.6;
 }
 
-.auth-box input{
-width:100%;
-margin:5px 0;
-padding:10px;
-border-radius:10px;
-border:none;
+/* CATEGORIES */
+.category{
+font-size:28px;
+font-weight:bold;
+margin:25px 0 10px;
+color:#7b2ff7;
 }
 
 /* CARDS */
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:15px;
 }
 
 .card{
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.1);
-padding:15px;
+background:white;
 border-radius:16px;
+padding:15px;
+border:1px solid #eee;
 transition:0.3s;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
 }
 
 .card:hover{
-transform:translateY(-6px);
-box-shadow:0 0 20px rgba(123,47,247,0.4);
+transform:translateY(-8px);
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card img{
+width:100%;
+height:140px;
+object-fit:cover;
+border-radius:12px;
 }
 
 .price{
-color:#ffd54f;
-font-size:18px;
+font-size:20px;
 font-weight:bold;
+color:#2e7d32;
+margin-top:8px;
 }
 
 .buy{
 width:100%;
-padding:10px;
+padding:12px;
+margin-top:10px;
 border:none;
-border-radius:10px;
-background:linear-gradient(90deg,#7b2ff7,#ff6a00);
+border-radius:12px;
+background:linear-gradient(90deg,#7b2ff7,#f9a825);
 color:white;
 font-weight:bold;
 cursor:pointer;
-}
-
-/* PROFILE */
-.profile{
-background:rgba(255,255,255,0.05);
-padding:20px;
-border-radius:14px;
-border:1px solid rgba(255,255,255,0.1);
 }
 
 /* CHAT */
 .chat{
 height:300px;
 overflow:auto;
-background:#111;
+background:white;
 padding:10px;
 border-radius:12px;
+border:1px solid #eee;
 }
 
-.msg{padding:8px;margin:5px;border-radius:10px;}
-.user{background:#7b2ff7;text-align:right;}
-.bot{background:#222;}
+.msg{
+margin:5px;
+padding:10px;
+border-radius:10px;
+font-size:16px;
+}
+
+.user{background:#7b2ff7;color:white;text-align:right;}
+.bot{background:#eee;}
+
+/* PROFILE */
+.profile{
+background:white;
+padding:20px;
+border-radius:14px;
+border:1px solid #eee;
+font-size:18px;
+}
+
+/* AUTH */
+.auth{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:100;
+}
+
+.authBox{
+background:white;
+padding:20px;
+border-radius:14px;
+width:300px;
+}
+
+.authBox input{
+width:100%;
+padding:10px;
+margin:6px 0;
+border-radius:10px;
+border:1px solid #ddd;
+}
+
+.authBox button{
+width:100%;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#7b2ff7;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
-<header>🔥 WELLYFUN PREMIUM</header>
+<header>🔥 WELLYFUN PREMIUM STORE</header>
 
 <!-- AUTH -->
 <div class="auth" id="auth">
-<div class="auth-box">
+<div class="authBox">
 <h3>Регистрация</h3>
-<input id="email" placeholder="Email">
 <input id="nick" placeholder="Ник Minecraft">
-<input id="pass" type="password" placeholder="Пароль">
-<button onclick="register()">Создать аккаунт</button>
+<input id="email" placeholder="Email">
+<input id="pass" placeholder="Пароль">
+<button onclick="register()">Войти</button>
 </div>
 </div>
 
+<!-- NAV -->
 <div class="nav">
 <button onclick="openTab('home')">Главная</button>
 <button onclick="openTab('shop')">Магазин</button>
@@ -173,46 +241,90 @@ border-radius:12px;
 
 <!-- HOME -->
 <div id="home" class="page active">
-<h1 class="purple">Добро пожаловать 👋</h1>
-<p class="yellow">WellyFun SMP-Анархия</p>
-<p class="orange">Экономика • PvP • Гриф • Кастом чары</p>
+<div class="big purple">Добро пожаловать 👋</div>
+<p class="yellow">WellyFun — SMP-Анархия сервер</p>
+<p class="orange">PvP • Экономика • Гриф • Кастом предметы</p>
 </div>
 
 <!-- SHOP -->
 <div id="shop" class="page">
 
-<h2 class="purple">🛒 Магазин</h2>
-
+<div class="category">💜 Привилегии</div>
 <div class="cards">
 
 <div class="card">
-<h3 class="yellow">VIP</h3>
-<p>Базовая привилегия</p>
+<img src="https://via.placeholder.com/300x140">
+<h3>VIP</h3>
+<div class="price">199₽</div>
+<button class="buy
+
+
+упить</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/300x140">
+<h3>Босс</h3>
 <div class="price">199₽</div>
 <button class="buy">Купить</button>
 </div>
 
 <div class="card">
-<h3 class="orange">Король</h3>
-<p>Топ привилегия</p>
-<div class="price">599₽</div>
+<img src="https://via.placeholder.com/300x140">
+<h3>Монарх</h3>
+<div class="price">299₽</div>
 <button class="buy">Купить</button>
 </div>
 
 <div class="card">
-<h3 class="purple">Трапка x10</h3>
-<p>PvP коробка</p>
-<div class="price">79₽</div>
+<img src="https://via.placeholder.com/300x140">
+<h3>Король</h3>
+<div class="price">599₽</div>
 <button class="buy">Купить</button>
 </div>
 
 </div>
+
+<div class="category">🧩 Ресурсы</div>
+<div class="cards">
+
+<div class="card"><img src="https://via.placeholder.com/300x140"><h3>Алмазы</h3><div class="price">20₽</div><button class="buy">Купить</button></div>
+<div class="card"><img src="https://via.placeholder.com/300x140"><h3>Геплы</h3><div class="price">40₽</div><button class="buy">Купить</button></div>
+<div class="card"><img src="https://via.placeholder.com/300x140"><h3>Тотем</h3><div class="price">30₽</div><button class="buy">Купить</button></div>
+
+</div>
+
+<div class="category">⚔ PvP</div>
+<div class="cards">
+
+<div class="card"><img src="https://via.placeholder.com/300x140"><h3>Трапка x10</h3><div class="price">79₽</div><button class="buy">Купить</button></div>
+<div class="card"><img src="https://via.placeholder.com/300x140"><h3>Nuke</h3><div class="price">99₽</div><button class="buy">Купить</button></div>
+
+</div>
+
+<div class="category">✨ Редкие</div>
+<div class="cards">
+
+<div class="card"><img src="https://via.placeholder.com/300x140"><h3>Талисман Монарха</h3><div class="price">139₽</div><button class="buy">Купить</button></div>
+
+</div>
+
+</div>
+
+<!-- CART -->
+<div id="cart" class="page">
+<h2 class="purple">Корзина</h2>
+<div id="cartItems"></div>
+
+<h3 class="yellow">💳 Оплата</h3>
+<button class="buy">Карта</button>
+<button class="buy">СБП</button>
+<button class="buy">Crypto</button>
 </div>
 
 <!-- SUPPORT -->
 <div id="support" class="page">
-
-<h2 class="yellow">🆘 Поддержка</h2>
+<h2 class="orange">Поддержка</h2>
 
 <div class="chat" id="chat">
 <div class="msg bot">Напиши проблему 👇</div>
@@ -222,38 +334,40 @@ border-radius:12px;
 
 <!-- INFO -->
 <div id="info" class="page">
-<h2 class="orange">📘 Информация</h2>
+<div class="infoBox">
+<div class="big purple">📘 Информация сервера</div>
 
-<p>✔ SMP-Анархия</p>
-<p>✔ Экономика</p>
-<p>✔ PvP / Гриф</p>
-<p>✔ Кастом предметы</p>
-<p>✔ Версия 1.21.11</p>
+<p>✔ Сервер: WellyFun SMP-Anarchy</p>
+<p>✔ Версия: 1.21.11</p>
+<p>✔ Режим: Анархия + экономика</p>
+<p>✔ Есть аукцион</p>
+<p>✔ Можно гриферить и PvP</p>
+<p>✔ Кастом предметы и чары</p>
+<p>✔ Регулярные вайпы</p>
+<p class="orange">🔥 Скоро глобальные обновления!</p>
+</div>
 </div>
 
 <!-- PROFILE -->
 <div id="profile" class="page">
 <h2 class="purple">👤 Профиль</h2>
-<div class="profile" id=
-
-
-Box">Не авторизован</div>
+<div class="profile" id="profileBox">Не авторизован</div>
 </div>
 
 <script>
 
-let user={};
-
 function register(){
-user.email=document.getElementById("email").value;
-user.nick=document.getElementById("nick").value;
-document.getElementById("auth").style.display="none";
+let nick=document.getElementById("nick").value;
+let email=document.getElementById("email").value;
+
 document.getElementById("profileBox").innerHTML=
-`Email: ${user.email}
-Ник
-user.nick}
-Ста
- Игрок`;
+`<b>Ник:</b> ${nick}
+<b>Em
+</b> ${email}
+<b>Ст
+:</b> Игрок`;
+
+document.getElementById("auth").style.display="none";
 }
 
 function openTab(id){
@@ -264,7 +378,7 @@ document.getElementById(id).classList.add("active");
 </script>
 
 </body>
-</html>"profile
+</html>">К
 
 
 
