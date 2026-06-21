@@ -9,19 +9,17 @@
 body{
 margin:0;
 font-family:Arial;
-background:#f7f8fc;
-color:#111;
+background:#0f0f1a;
+color:white;
 }
 
 /* HEADER */
 header{
-background:white;
+background:linear-gradient(90deg,#7b2ff7,#f9a825);
 padding:22px;
 text-align:center;
-font-size:30px;
+font-size:32px;
 font-weight:bold;
-border-bottom:1px solid #eee;
-animation:fadeDown 0.5s ease;
 }
 
 /* TABS */
@@ -35,248 +33,118 @@ padding:15px;
 
 .tab{
 padding:12px 16px;
-background:white;
-border:1px solid #eee;
+background:#1c1c2e;
+border:none;
 border-radius:12px;
+color:white;
 cursor:pointer;
-transition:0.3s;
-}
-
-.tab:hover{
-transform:scale(1.06);
+font-weight:bold;
 }
 
 .tab.active{
-background:#111;
-color:white;
+background:#f9a825;
+color:black;
 }
 
-/* PAGES */
-.page{
-display:none;
-padding:20px;
-animation:fadeIn 0.4s ease;
-}
+/* PAGE */
+.page{display:none;padding:20px;}
+.page.active{display:block;}
 
-.page.active{
-display:block;
-}
-
-/* CARDS */
+/* CARD */
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:15px;
 }
 
-/* CARD */
 .card{
-background:white;
-padding:15px;
+background:#1a1a2d;
 border-radius:14px;
-border:1px solid #eee;
-cursor:pointer;
+padding:15px;
+border:1px solid #333;
 transition:0.3s;
-animation:popIn 0.4s ease;
 }
 
 .card:hover{
-transform:translateY(-7px) scale(1.02);
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transform:scale(1.03);
 }
 
-.price{
-color:green;
-font-weight:bold;
-margin-top:8px;
-font-size:18px;
+/* IMAGE */
+.card img{
+width:100%;
+height:140px;
+object-fit:cover;
+border-radius:12px;
+margin-bottom:10px;
 }
+
+/* COLORS */
+.title-purple{color:#b388ff;}
+.title-yellow{color:#ffd54f;}
+.title-orange{color:#ff8a50;}
 
 /* BUTTON */
 .buy-btn{
-margin-top:10px;
 width:100%;
-padding:11px;
+padding:10px;
 border:none;
 border-radius:10px;
-background:#111;
-color:white;
+background:linear-gradient(90deg,#ffd54f,#ff8a50);
+font-weight:bold;
 cursor:pointer;
-transition:0.3s;
 }
 
-.buy-btn:hover{
-background:#333;
-transform:scale(1.05);
-}
-
-/* POPUP */
-.popup{
+/* ADMIN */
+.admin{
 display:none;
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.5);
-animation:fadeBg 0.3s ease;
-}
-
-.popup-box{
-background:white;
-width:380px;
-margin:120px auto;
-padding:20px;
-border-radius:14px;
-text-align:center;
-animation:popupIn 0.4s ease;
-}
-
-/* CHAT */
-.chat{
-background:white;
-height:300px;
-overflow:auto;
-padding:15px;
-border-radius:12px;
-border:1px solid #eee;
-}
-
-.msg{
-margin:8px 0;
-padding:10px;
-border-radius:10px;
-animation:msgIn 0.3s ease;
-}
-
-.user{background:#111;color:white;text-align:right;}
-.bot{background:#eee;}
-
-.chat-input{
-display:flex;
-gap:10px;
-margin-top:10px;
-}
-
-.chat-input input{
-flex:1;
-padding:10px;
-border-radius:10px;
-border:1px solid #ccc;
-}
-
-.chat-input button{
-padding:10px 15px;
-border:none;
 background:#111;
-color:white;
-border-radius:10px;
-cursor:pointer;
-transition:0.3s;
+padding:20px;
+border-radius:12px;
+border:1px solid #444;
 }
-
-.chat-input button:hover{
-transform:scale(1.05);
-}
-
-/* ANIMATIONS */
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes popIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes popupIn{from{opacity:0;transform:scale(0.9) translateY(30px)}to{opacity:1;transform:scale(1) translateY(0)}}
-@keyframes fadeBg{from{opacity:0}to{opacity:1}}
-@keyframes msgIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
 </style>
 </head>
 
 <body>
 
-<header>🔥 WellyFun Shop</header>
+<header>🔥 WELLYFUN SHOP</header>
 
 <div class="tabs">
-<div class="tab active" onclick="openTab('home',event)">Главная</div>
-<div class="tab" onclick="openTab('shop',event)">Магазин</div>
-<div class="tab" onclick="openTab('cart',event)">Корзина</div>
-<div class="tab" onclick="openTab('support',event)">Поддержка</div>
-<div class="tab" onclick="openTab('info',event)">Инфо</div>
-<div class="tab" onclick="openTab('account',event)">ЛК</div>
-</div>
-
-<!-- HOME -->
-<div id="home" class="page active">
-<h2>Добро пожаловать на WellyFun 🚀</h2>
-<p>SMP-Анархия сервер с экономикой, PvP и кастом предметами.</p>
+<button class="tab active" onclick="openTab('shop',event)">Магазин</button>
+<button class="tab" onclick="openTab('cart',event)">Корзина</button>
+<button class="tab" onclick="openTab('support',event)">Поддержка</button>
+<button class="tab" onclick="openTab('info',event)">Инфо</button>
+<button class="tab" onclick="openTab('profile',event)">Профиль</button>
+<button class="tab" onclick="openTab('admin',event)">Админ</button>
 </div>
 
 <!-- SHOP -->
-<div id="shop" class="page">
+<div id="shop" class="page active">
+
 <div class="cards">
 
 <div class="card">
-<h3>VIP</h3>
-<div class="price">199₽</div>
-<button class="buy-btn" onclick="buy('VIP','Базовая привилегия','199₽')">Купить</button>
+<img src="https://images.minecraft.net/vip.jpg">
+<h3 class="title-yellow">VIP</h3>
+<p>Базовая привилегия</p>
+<div class="title-orange">199₽</div>
+<button class="buy-btn" onclick="buy('VIP','199₽')">Купить</button>
 </div>
 
 <div class="card">
-<h3>Босс</h3>
-<div class="price">199₽</div>
-<button class="buy-btn" onclick="buy('Босс','Усиленная привилегия','199₽')">Купить</button>
+<img src="https://images.minecraft.net/king.jpg">
+<h3 class="title-purple">Король</h3>
+<p>Топ привилегия</p>
+<div class="title-orange">599₽</div>
+<button class="buy-btn" onclick="buy('Король','599₽')">Купить</button>
 </div>
 
 <div class="card">
-<h3>Монарх</h3>
-<div class="price">299₽</div>
-<button class="buy-btn" onclick="buy('Монарх','Средний донат','299₽')">Купить<
-
-
-on>
-</div>
-
-<div class="card">
-<h3>Король</h3>
-<div class="price">599₽</div>
-<button class="buy-btn" onclick="buy('Король','Топ донат','599₽')">Купить</button>
-</div>
-
-<div class="card">
-<h3>Трапка x10</h3>
-<div class="price">79₽</div>
-<button class="buy-btn" onclick="buy('Трапка x10','PvP коробка из обсидиана','79₽')">Купить</button>
-</div>
-
-<div class="card">
-<h3>Нuke</h3>
-<div class="price">99₽</div>
-<button class="buy-btn" onclick="buy('Nuke','Мощное разрушение базы','99₽')">Купить</button>
-</div>
-
-<div class="card">
-<h3>Пласт x10</h3>
-<div class="price">69₽</div>
-<button class="buy-btn" onclick="buy('Пласт x10','Ловушки и защита','69₽')">Купить</button>
-</div>
-
-<div class="card">
-<h3>Тотем</h3>
-<div class="price">30₽</div>
-<button class="buy-btn" onclick="buy('Тотем','Спасает от смерти','30₽')">Купить</button>
-</div>
-
-<div class="card">
-<h3>Алмазы</h3>
-<div class="price">20₽</div>
-<button class="buy-btn" onclick="buy('Алмазы','Экономика сервера','20₽')">Купить</button>
-</div>
-
-<div class="card">
-<h3>Геплы</h3>
-<div class="price">40₽</div>
-<button class="buy-btn" onclick="buy('Геплы','Выживание PvP','40₽')">Купить</button>
-</div>
-
-<div class="card">
-<h3>Талисман Монарха</h3>
-<div class="price">139₽</div>
-<button class="buy-btn" onclick="buy('Талисман','Редкий предмет','139₽')">Купить</button>
+<img src="https://images.minecraft.net/trap.jpg">
+<h3 class="title-yellow">Трапка x10</h3>
+<p>PvP коробка</p>
+<div class="title-orange">79₽</div>
+<button class="buy-btn" onclick="buy('Трапка','79₽')">Купить</button>
 </div>
 
 </div>
@@ -284,54 +152,44 @@ on>
 
 <!-- CART -->
 <div id="cart" class="page">
-<h2>🛒 Корзина</h2>
+<h2>Корзина</h2>
 <div id="cartItems"></div>
+
+<h3>💳 Оплата</h3>
+<button class="buy-btn" onclick="pay()">Оплатить картой (FreeKassa)</button>
 </div>
 
 <!-- SUPPORT -->
 <div id="support" class="page">
-
-<h2>🆘 Поддержка</h2>
-
-<div class="chat" id="chat">
-<div class="msg bot">Привет! Напиши проблему 👇</div>
-</div>
-
-<div class="chat-input">
-<input id="msg" placeholder="Сообщение...">
-<button onclick="sendMsg()">Отправить</button>
-</div>
-
+<h2>Поддержка</h2>
+<p>Discord: YOUR LINK</p>
 </div>
 
 <!-- INFO -->
 <div id="info" class="page">
-<h2>📘 Информация</h2>
-<p><b>Режим:</b> SMP-Анархия</p>
-<p>Есть аукцион</p>
-<p>Своя экономика</p>
-<p>Можно гриферить и PvP</p>
-<p>Кастом предметы и чары</p>
-<p>Версия: 1.21.11</p>
-<p>Регулярные вайпы</p>
-<p>Скоро обновления 🚀</p>
+<h2>Информация</h2>
+<p>WellyFun SMP-Анархия</p>
+<p>Версия 1.21.11</p>
 </div>
 
-<!-- ACCOUNT -->
-<div id="account" class="page">
-<h2>👤 Личный кабинет</h2>
-<p>Здесь будет статистика, донат и привилегии игрока.</p>
+<!-- PROFILE -->
+<div id="profile" class="page">
+<h2>Профиль</h2>
+<p>Ник: Player</p>
+<p>Покупки: 0</p>
 </div>
 
-<!-- POPUP -->
-<div class="popup" id="popup">
-<div class="popup-box">
-<h3 id="pname"></h3>
-<p id="pdesc"></p>
-<h3 id="pprice"></h3>
+<!-- ADMIN -->
+<div id="admin" class="page">
+<div class="admin" id="adminPanel">
 
-<button class="buy-btn" onclick="addToCart()">Добавить в корзину</button>
-<button class="buy-btn" onclick="closePopup()">Закрыть</button>
+<h2>Админ панель</h2>
+
+<p>Добавить товар:</p>
+<input placeholder="Название">
+<input placeholder="Цена">
+<button class="buy-btn">Добавить</button>
+
 </div>
 </div>
 
@@ -346,44 +204,18 @@ document.getElementById(id).classList.add("active");
 event.target.classList.add("active");
 }
 
-function buy(name,desc,price){
-currentItem={name,desc,price};
-document.getElementById("pname").innerText=name;
-document.getElementById("pdesc").innerText=desc;
-document.getElementById("pprice").innerText=price;
-document.getElementById("popup").style.display="block";
+function buy(name,price){
+currentItem={name,price};
+alert("Добавлено: " + name);
 }
 
-function addToCart(){
-let cart=document.getElementById("cartItems");
-cart.innerHTML+=`
-<div style="background:white;padding:10px;border-radius:10px;margin:8px 0;border:1px solid #eee">
-<b>${currentItem.name}</b> — ${currentItem.price}
-</div>`;
-alert("Добавлено в корзину");
+function pay(){
+alert("Подключение: FreeKassa / Lava / Enot (backend нужен)");
 }
-
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
-
-function sendMsg(){
-let input=document.getElementById("msg");
-if(!input.value) return;
-
-let chat=document.getElementById("chat");
-
-chat.innerHTML+=`<div class="msg user">${input.value}</div>`;
-chat.innerHTML+=`<div class="msg bot">Мы скоро ответим 👍</div>`;
-
-input.value="";
-chat.scrollTop=chat.scrollHeight;
-}
-
 </script>
 
 </body>
-</html>/butt
+</html>
 
 
 
