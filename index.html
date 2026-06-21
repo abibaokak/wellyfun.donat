@@ -3,277 +3,257 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minecraft Shop</title>
+<title>WellyFun Store</title>
 
 <style>
-body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#0f0f1a;
-    color:white;
+body{
+margin:0;
+font-family: Arial;
+background:#f6f7fb;
+color:#111;
 }
 
-/* TOP BAR */
-.header {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 25px;
-    background:#151528;
-    position:sticky;
-    top:0;
-    z-index:1000;
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+position:sticky;
+top:0;
 }
 
-.logo {
-    font-size:20px;
-    font-weight:bold;
-    color:#7c5cff;
+.logo{
+font-weight:bold;
+font-size:20px;
+color:orange;
 }
 
-.nav button {
-    background:none;
-    border:none;
-    color:white;
-    margin:0 10px;
-    cursor:pointer;
-    font-size:14px;
-    opacity:0.7;
-}
-.nav button:hover {opacity:1}
-
-/* ACCOUNT */
-.account {
-    background:#1c1c33;
-    padding:8px 12px;
-    border-radius:10px;
-    font-size:14px;
+nav button{
+margin:5px;
+padding:10px 15px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:#eee;
+transition:0.3s;
 }
 
-/* LAYOUT */
-.container {
-    display:flex;
+nav button:hover{
+background:orange;
+color:white;
+transform:scale(1.05);
 }
 
-/* SIDEBAR */
-.sidebar {
-    width:220px;
-    background:#141424;
-    min-height:100vh;
-    padding:15px;
+.section{display:none;padding:20px;}
+.active{display:block;}
+
+/* магазин */
+.categories{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:20px;
 }
 
-.sidebar button {
-    width:100%;
-    margin:8px 0;
-    padding:10px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background:#222244;
-    color:white;
+.cat{
+padding:10px 15px;
+border:2px solid orange;
+border-radius:10px;
+cursor:pointer;
+background:white;
 }
 
-.sidebar button:hover {
-    background:#7c5cff;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
 }
 
-/* PRODUCTS */
-.main {
-    flex:1;
-    padding:20px;
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap:15px;
+.card{
+background:white;
+padding:15px;
+border-radius:15px;
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
+transition:0.3s;
 }
 
-.card {
-    background:#1a1a2e;
-    padding:15px;
-    border-radius:15px;
-    transition:0.3s;
-    cursor:pointer;
+.card:hover{transform:translateY(-5px);}
+
+.card button{
+margin-top:10px;
+padding:10px;
+border:none;
+border-radius:10px;
+background:orange;
+color:white;
+cursor:pointer;
 }
 
-.card:hover {
-    transform:scale(1.05);
-    background:#242444;
+/* модалка */
+.modal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.5);
+justify-content:center;
+align-items:center;
 }
 
-.price {
-    color:#7c5cff;
-    font-weight:bold;
-    margin-top:10px;
+.modal-content{
+background:white;
+padding:20px;
+border-radius:15px;
+width:300px;
 }
 
-.buy {
-    margin-top:10px;
-    padding:8px;
-    width:100%;
-    border:none;
-    border-radius:10px;
-    background:#7c5cff;
-    color:white;
-    cursor:pointer;
+/* чат */
+.chat-box{
+height:300px;
+overflow:auto;
+background:white;
+padding:10px;
+border-radius:10px;
 }
 
-/* POPUP */
-.popup {
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    background:#1b1b2f;
-    padding:20px;
-    border-radius:15px;
-    display:none;
-    z-index:2000;
-}
-
-.popup button {
-    margin-top:10px;
-    width:100%;
-    padding:8px;
-    border:none;
-    border-radius:10px;
-    background:#7c5cff;
-    color:white;
-}
-
-/* BACKDROP */
-#backdrop {
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:black;
-    opacity:0.6;
-    display:none;
-    z-index:1500;
+input, textarea{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #ccc;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-    <div class="logo">⚡ MINE SHOP</div>
+<header>
+<div class="logo">WellyFun</div>
 
-    <div class="nav">
-        <button onclick="setCat('priv')">Привилегии</button>
-        <button onclick="setCat('res')">Ресурсы</button>
-        <button onclick="setCat('uni')">Уникальные</button>
-    </div>
+<nav>
+<button onclick="openTab('home')">Главная</button>
+<button onclick="openTab('shop')">Магазин</button>
+<button onclick="openTab('support')">Поддержка</button>
+<button onclick="openTab('info')">Инфо</button>
+<button onclick="openTab('profile')">Профиль</button>
+<button onclick="openTab('login')">Вход</button>
+<button onclick="openTab('reg')">Регистрация</button>
+</nav>
+</header>
 
-    <div class="account">
-        Ник: <span id="nick">Player</span> |
-        Баланс: <span id="bal">0</span>₽
-    </div>
+<!-- ГЛАВНАЯ -->
+<div id="home" class="section active">
+<h1>Добро пожаловать на WellyFun</h1>
+<p>Анархия + SMP режим. Орбитальные пушки, аукцион, ивенты, автошахта.</p>
 </div>
 
-<div class="container">
-    <div class="sidebar">
-        <button onclick="addMoney(100)">+100₽ (тест)</button>
-        <button onclick="addMoney(500)">+500₽ (тест)</button>
-        <button onclick="reset()">Сброс</button>
-    </div>
+<!-- МАГАЗИН -->
+<div id="shop" class="section">
 
-    <div class="main" id="shop"></div>
+<div class="categories">
+<div class="cat" onclick="filter('priv')">Привилегии</div>
+<div class="cat" onclick="filter('res')">Ресурсы</div>
+<div class="cat" onclick="filter('orb')">Орбитальные пушки</div>
+<div class="cat" onclick="filter('other')">Разное</div>
 </div>
 
-<div id="backdrop"></div>
+<div class="grid">
 
-<div class="popup" id="popup">
-    <h3 id="pname"></h3>
-    <p id="pprice"></p>
-    <button onclick="confirmBuy()">Купить</button>
+<div class="card priv">VIP - 59₽ <button onclick="buy('VIP','59₽','Базовая привилегия')">Купить</button></div>
+<div class="card priv">Winner - 499₽ <button onclick="buy('Winner','499₽','Имба: даёт флай')">Купить</button></div>
+<div class="card priv">Король - 899₽ <button onclick="buy('Король','899₽','Лучшая привилегия')">Купить</button></div>
+<div class="card priv">Стажер - 1199₽ <button onclick="buy('Стажер','1199₽','Путь до админа')">Купить</button></div>
+
+<div class="card res">Геплы стак - 49₽ <button onclick="buy('Геплы','49₽','Золотые яблоки')">Купить</button></div>
+<div class="card res">Незерит стак - 99₽ <button onclick="buy('Незерит','99₽','Редкий ресурс')">Купить</button></div>
+
+<div class="card orb">Nuke - 100₽ <button onclick="buy('Nuke','100₽','Кольца TNT')">Купить</button></div>
+<div class="card orb">Stab - 89₽ <button onclick="buy('Stab','89₽','Дыра до бедрока')">Купить</button></div>
+
+<div class="card other">Разбан - 199₽ <button onclick="buy('Разбан','199₽','Снятие бана')">Купить</button></div>
+
+</div>
+</div>
+
+<!-- ПОДДЕРЖКА -->
+<div id="support" class="section">
+<h2>Поддержка</h2>
+<div class="chat-box" id="chat"></div>
+<input id="msg" placeholder="Напиши сообщение...">
+<button onclick="send()">Отправить</button>
+</div>
+
+<!-- ИНФО -->
+<div id="info" class="section">
+<h1>WellyFun Server</h1>
+<p>Анархия-SMP
+
+
+сервер 1.21.11</p>
+<p>Орбитальные пушки, автошахта, ивенты, экономика.</p>
+</div>
+
+<!-- ПРОФИЛЬ -->
+<div id="profile" class="section">
+<h2>Профиль</h2>
+<p>Ник: Steve</p>
+<p>Баланс: 0₽</p>
+</div>
+
+<!-- ВХОД -->
+<div id="login" class="section">
+<h2>Вход</h2>
+<input placeholder="Email">
+<input placeholder="Пароль">
+<button>Войти</button>
+</div>
+
+<!-- РЕГ -->
+<div id="reg" class="section">
+<h2>Регистрация</h2>
+<input placeholder="Email">
+<input placeholder="Ник Minecraft">
+<input placeholder="Пароль">
+<button>Создать аккаунт</button>
+</div>
+
+<!-- МОДАЛКА -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3 id="mname"></h3>
+<p id="mdesc"></p>
+<p id="mprice"></p>
+<button>Перейти к оплате</button>
+<button onclick="closeModal()">Закрыть</button>
+</div>
 </div>
 
 <script>
-let balance = parseInt(localStorage.getItem("bal")) || 0;
-let current = null;
-let category = "priv";
-
-const items = [
-    {id:1,cat:"priv",name:"VIP",price:199},
-    {id:2,cat:"priv",name:"Босс",price:199},
-    {id:3,cat:"priv",name:"Монарх",price:299},
-    {id:4,cat:"priv",name:"Король",price:599},
-
-    {id:5,cat:"res",name:"Стак геплов",price:40},
-    {id:6,cat:"res",name:"Стак алмазов",price:20},
-    {id:7,cat:"res",name:"Чар геплы x16",price:59},
-
-    {id:8,cat:"uni",name:"Nuke",price:99},
-    {id:9,cat:"uni",name:"Трапка x10",price:79},
-    {id:10,cat:"uni",name:"Пласт x10",price:69},
-];
-
-function render(){
-    document.getElementById("bal").innerText = balance;
-
-    let shop = document.getElementById("shop");
-    shop.innerHTML = "";
-
-    items.filter(i=>i.cat==category).forEach(i=>{
-        shop.innerHTML += `
-        <div class="card">
-
-
-<h3>${i.name}</h3>
-            <div class="price">${i.price}₽</div>
-            <button class="buy" onclick="openBuy(${i.id})">Купить</button>
-        </div>`;
-    });
+function openTab(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
 }
 
-function setCat(c){
-    category=c;
-    render();
+function buy(name,price,desc){
+document.getElementById('modal').style.display='flex';
+document.getElementById('mname').innerText=name;
+document.getElementById('mprice').innerText=price;
+document.getElementById('mdesc').innerText=desc;
 }
 
-function openBuy(id){
-    current = items.find(i=>i.id==id);
-    document.getElementById("pname").innerText = current.name;
-    document.getElementById("pprice").innerText = current.price + "₽";
-
-    document.getElementById("popup").style.display="block";
-    document.getElementById("backdrop").style.display="block";
+function closeModal(){
+document.getElementById('modal').style.display='none';
 }
 
-function confirmBuy(){
-    if(balance < current.price){
-        alert("❌ Нет денег");
-        return;
-    }
-    balance -= current.price;
-    localStorage.setItem("bal",balance);
-
-    alert("✅ Куплено: " + current.name);
-
-    close();
-    render();
+function send(){
+let chat=document.getElementById('chat');
+let msg=document.getElementById('msg');
+chat.innerHTML+=`<div>Ты: ${msg.value}</div>`;
+msg.value='';
 }
-
-function close(){
-    document.getElementById("popup").style.display="none";
-    document.getElementById("backdrop").style.display="none";
-}
-
-function addMoney(m){
-    balance += m;
-    localStorage.setItem("bal",balance);
-    render();
-}
-
-function reset(){
-    balance=0;
-    localStorage.setItem("bal",0);
-    render();
-}
-
-render();
 </script>
 
 </body>
