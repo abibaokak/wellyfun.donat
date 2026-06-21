@@ -9,17 +9,18 @@
 body{
 margin:0;
 font-family:Arial;
-background:#0f0f1a;
-color:white;
+background:#f6f7fb;
+color:#111;
 }
 
 /* HEADER */
 header{
-background:linear-gradient(90deg,#7b2ff7,#f9a825);
-padding:22px;
+background:linear-gradient(90deg,#7b2ff7,#f9a825,#ff8a50);
+padding:25px;
 text-align:center;
-font-size:32px;
+font-size:34px;
 font-weight:bold;
+color:white;
 }
 
 /* TABS */
@@ -33,24 +34,46 @@ padding:15px;
 
 .tab{
 padding:12px 16px;
-background:#1c1c2e;
-border:none;
+background:white;
 border-radius:12px;
-color:white;
+border:1px solid #eee;
 cursor:pointer;
 font-weight:bold;
+transition:0.3s;
+font-size:16px;
+}
+
+.tab:hover{
+transform:scale(1.08);
 }
 
 .tab.active{
-background:#f9a825;
-color:black;
+background:#111;
+color:white;
 }
 
-/* PAGE */
-.page{display:none;padding:20px;}
-.page.active{display:block;}
+/* PAGES */
+.page{
+display:none;
+padding:25px;
+font-size:22px;
+}
 
-/* CARD */
+.page.active{
+display:block;
+animation:fade 0.3s ease;
+}
+
+/* BIG TEXT COLORS */
+h1,h2{
+font-size:36px;
+}
+
+.purple{color:#7b2ff7;}
+.yellow{color:#f9a825;}
+.orange{color:#ff8a50;}
+
+/* CARDS */
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -58,15 +81,17 @@ gap:15px;
 }
 
 .card{
-background:#1a1a2d;
-border-radius:14px;
+background:white;
 padding:15px;
-border:1px solid #333;
+border-radius:14px;
+border:1px solid #eee;
+cursor:pointer;
 transition:0.3s;
 }
 
 .card:hover{
-transform:scale(1.03);
+transform:translateY(-8px) scale(1.03);
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
 /* IMAGE */
@@ -78,29 +103,105 @@ border-radius:12px;
 margin-bottom:10px;
 }
 
-/* COLORS */
-.title-purple{color:#b388ff;}
-.title-yellow{color:#ffd54f;}
-.title-orange{color:#ff8a50;}
+/* PRICE */
+.price{
+color:#2e7d32;
+font-weight:bold;
+font-size:20px;
+margin-top:8px;
+}
 
 /* BUTTON */
 .buy-btn{
 width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-weight:bold;
+background:linear-gradient(90deg,#7b2ff7,#f9a825);
+color:white;
+transition:0.3s;
+}
+
+.buy-btn:hover{
+transform:scale(1.05);
+background:linear-gradient(90deg,#ff8a50,#f9a825);
+}
+
+/* POPUP */
+.popup{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.5);
+}
+
+.popup-box{
+background:white;
+width:400px;
+margin:120px auto;
+padding:20px;
+border-radius:14px;
+text-align:center;
+}
+
+/* CHAT (КРАСИВЫЙ КАК ТЫ ХОТЕЛ) */
+.chat{
+background:white;
+height:320px;
+overflow:auto;
+padding:15px;
+border-radius:14px;
+border:1px solid #eee;
+}
+
+.msg{
+margin:8px 0;
 padding:10px;
+border-radius:10px;
+font-size:18px;
+}
+
+.user{background:#7b2ff7;color:white;text-align:right;}
+.bot{background:#eee;}
+
+.chat-input{
+display:flex;
+gap:10px;
+margin-top:10px;
+}
+
+.chat-input input{
+flex:1;
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+.chat-input button{
+padding:12px 16px;
 border:none;
 border-radius:10px;
-background:linear-gradient(90deg,#ffd54f,#ff8a50);
+background:#f9a825;
 font-weight:bold;
 cursor:pointer;
 }
 
-/* ADMIN */
-.admin{
-display:none;
-background:#111;
+/* PROFILE */
+.profile{
+background:white;
 padding:20px;
-border-radius:12px;
-border:1px solid #444;
+border-radius:14px;
+border:1px solid #eee;
+font-size:20px;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
@@ -110,41 +211,115 @@ border:1px solid #444;
 <header>🔥 WELLYFUN SHOP</header>
 
 <div class="tabs">
-<button class="tab active" onclick="openTab('shop',event)">Магазин</button>
+<button class="tab active" onclick="openTab('home',event)">Главная</button>
+<button class="tab" onclick="openTab('shop',event)">Магазин</button>
 <button class="tab" onclick="openTab('cart',event)">Корзина</button>
 <button class="tab" onclick="openTab('support',event)">Поддержка</button>
 <button class="tab" onclick="openTab('info',event)">Инфо</button>
 <button class="tab" onclick="openTab('profile',event)">Профиль</button>
-<button class="tab" onclick="openTab('admin',event)">Админ</button>
+</div>
+
+<!-- HOME -->
+<div id="home" class="page active">
+<h1 class="purple">Добро пожаловать 👋</h1>
+<p class="yellow">SMP-Анархия сервер WellyFun</p>
+<p class="orange">Экономика • PvP • Гриф • Кастом предметы</p>
 </div>
 
 <!-- SHOP -->
-<div id="shop" class="page active">
+<div id="shop" class="page">
+<h2 class="purple">🛒 Магазин</h2>
 
 <div class="cards">
 
+<!-- VIP -->
 <div class="card">
-<img src="https://images.minecraft.net/vip.jpg">
-<h3 class="title-yellow">VIP</h3>
+<img src="https://via.placeholder.com/300x140">
+<h3 class="yellow">VIP</h3>
 <p>Базовая привилегия</p>
-<div class="title-orange">199₽</div>
-<button class="buy-btn" onclick="buy('VIP','199₽')">Купить</button>
+<div class="price">199₽</div>
+<button class="buy-btn" onclick="buy('VIP','Базовая привилегия','199₽')">Купить</button>
+</div>
+
+<!-- BOSS -->
+<div class="card">
+<img src="https://via.placeholder.com/300x140">
+<h3 class="orange">Босс</h3>
+<p>Усиленная привилегия</p>
+<div class="price
+
+
+</div>
+<button class="buy-btn" onclick="buy('Босс','Усиленная привилегия','199₽')">Купить</button>
+</div>
+
+<!-- MONARCH -->
+<div class="card">
+<img src="https://via.placeholder.com/300x140">
+<h3 class="purple">Монарх</h3>
+<p>Средний донат</p>
+<div class="price">299₽</div>
+<button class="buy-btn" onclick="buy('Монарх','Средний донат','299₽')">Купить</button>
+</div>
+
+<!-- KING -->
+<div class="card">
+<img src="https://via.placeholder.com/300x140">
+<h3 class="yellow">Король</h3>
+<p>Топ донат</p>
+<div class="price">599₽</div>
+<button class="buy-btn" onclick="buy('Король','Топ донат','599₽')">Купить</button>
+</div>
+
+<!-- RESOURCES -->
+<div class="card">
+<img src="https://via.placeholder.com/300x140">
+<h3 class="orange">Алмазы</h3>
+<p>Экономика</p>
+<div class="price">20₽</div>
+<button class="buy-btn" onclick="buy('Алмазы','Ресурс','20₽')">Купить</button>
 </div>
 
 <div class="card">
-<img src="https://images.minecraft.net/king.jpg">
-<h3 class="title-purple">Король</h3>
-<p>Топ привилегия</p>
-<div class="title-orange">599₽</div>
-<button class="buy-btn" onclick="buy('Король','599₽')">Купить</button>
+<img src="https://via.placeholder.com/300x140">
+<h3 class="purple">Геплы</h3>
+<p>PvP ресурс</p>
+<div class="price">40₽</div>
+<button class="buy-btn" onclick="buy('Геплы','PvP ресурс','40₽')">Купить</button>
 </div>
 
 <div class="card">
-<img src="https://images.minecraft.net/trap.jpg">
-<h3 class="title-yellow">Трапка x10</h3>
-<p>PvP коробка</p>
-<div class="title-orange">79₽</div>
-<button class="buy-btn" onclick="buy('Трапка','79₽')">Купить</button>
+<img src="https://via.placeholder.com/300x140">
+<h3 class="yellow">Тотем</h3>
+<p>Спасение от смерти</p>
+<div class="price">30₽</div>
+<button class="buy-btn" onclick="buy('Тотем','Спасение','30₽')">Купить</button>
+</div>
+
+<!-- PVP -->
+<div class="card">
+<img src="https://via.placeholder.com/300x140">
+<h3 class="purple">Трапка x10</h3>
+<p>Обсидиановая PvP коробка</p>
+<div class="price">79₽</div>
+<button class="buy-btn" onclick="buy('Трапка','PvP','79₽')">Купить</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/300x140">
+<h3 class="orange">Nuke</h3>
+<p>Разрушение базы</p>
+<div class="price">99₽</div>
+<button class="buy-btn" onclick="buy('Nuke','Разрушение','99₽')">Купить</button>
+</div>
+
+<!-- SPECIAL -->
+<div class="card">
+<img src="https://via.placeholder.com/300x140">
+<h3 class="yellow">Талисман Монарха</h3>
+<p>Редкий предмет</p>
+<div class="price">139₽</div>
+<button class="buy-btn" onclick="buy('Талисман','Редкий','139₽')">Купить</button>
 </div>
 
 </div>
@@ -152,44 +327,63 @@ border:1px solid #444;
 
 <!-- CART -->
 <div id="cart" class="page">
-<h2>Корзина</h2>
+<h2 class="purple">🛒 Корзина</h2>
 <div id="cartItems"></div>
-
-<h3>💳 Оплата</h3>
-<button class="buy-btn" onclick="pay()">Оплатить картой (FreeKassa)</button>
 </div>
 
 <!-- SUPPORT -->
 <div id="support" class="page">
-<h2>Поддержка</h2>
-<p>Discord: YOUR LINK</p>
+
+<h2 class="orange">🆘 Поддержка</h2>
+
+<div class="chat" id="chat">
+<div class="msg bot">Привет! Напиши проблему 👇</div>
+</div>
+
+<div class="chat-input">
+<input id="msg" placeholder="Сообщение...">
+<button onclick="sendMsg()">Отправить</button>
+</div>
+
 </div>
 
 <!-- INFO -->
 <div id="info" class="page">
-<h2>Информация</h2>
-<p>WellyFun SMP-Анархия</p>
-<p>Версия 1.21.11</p>
+
+<h2 class="purple">📘 Информация</h2>
+
+<p class="yellow">Режим: SMP-Анархия</p>
+<p class="orange">Экономика + PvP + гриф</p>
+<p>✔ кастом предметы</p>
+<p>✔ аукцион</p>
+<p>✔ регулярный вайп</p>
+<p>✔ версия 1.21.11</p>
+
 </div>
 
 <!-- PROFILE -->
 <div id="profile" class="page">
-<h2>Профиль</h2>
+
+<h2 class="purple">👤 Профиль</h2>
+
+<div class="profile">
 <p>Ник: Player</p>
+<p>Баланс: 0₽</p>
 <p>Покупки: 0</p>
+<p>Привилегия: Нет</p>
 </div>
 
-<!-- ADMIN -->
-<div id="admin" class="page">
-<div class="admin" id="adminPanel">
+</div>
 
-<h2>Админ панель</h2>
+<!-- POPUP -->
+<div class="popup" id="popup">
+<div class="popup-box">
+<h2 id="pname" class="purple"></h2>
+<p id="pdesc"></p>
+<h2 class="yellow" id="pprice"></h2>
 
-<p>Добавить товар:</p>
-<input placeholder="Название">
-<input placeholder="Цена">
-<button class="buy-btn">Добавить</button>
-
+<button class="buy-btn" onclick="addToCart()">Добавить в корзину</button>
+<button class="buy-btn" onclick="closePopup()">Закрыть</button>
 </div>
 </div>
 
@@ -204,19 +398,44 @@ document.getElementById(id).classList.add("active");
 event.target.classList.add("active");
 }
 
-function buy(name,price){
-currentItem={name,price};
-alert("Добавлено: " + name);
+function buy(name,desc,price){
+currentItem={name,desc,price};
+document.getElementById("pname").innerText=name;
+document.getElementById("pdesc").innerText=desc;
+document.getElementById("pprice").innerText=price;
+document.getElementById("popup").style.display="block";
 }
 
-function pay(){
-alert("Подключение: FreeKassa / Lava / Enot (backend нужен)");
+function addToCart(){
+let cart=document.getElementById("cartItems");
+cart.innerHTML+=`<div style="background:white;padding:10px;border-radius:10px;margin:8px 0">
+<b>${currentItem.name}</b> — ${
+
+
+currentItem.price}
+</div>`;
+alert("Добавлено в корзину");
 }
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+function sendMsg(){
+let input=document.getElementById("msg");
+if(!input.value) return;
+
+let chat=document.getElementById("chat");
+chat.innerHTML+=`<div class="msg user">${input.value}</div>`;
+chat.innerHTML+=`<div class="msg bot">Мы скоро ответим 👍</div>`;
+
+input.value="";
+chat.scrollTop=chat.scrollHeight;
+}
+
 </script>
 
 </body>
-</html>
-
-
+</html>">199₽
 
 
