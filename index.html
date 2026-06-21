@@ -3,23 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WellyFun Premium</title>
+<title>WellyFun Store</title>
 
 <style>
 body{
 margin:0;
 font-family:Arial;
-background:#0b0b12;
-color:white;
+background:#f5f7fb;
+color:#111;
 }
 
 /* HEADER */
 header{
-background:linear-gradient(90deg,#7b2ff7,#f9a825,#ff6a00);
-padding:25px;
+background:linear-gradient(90deg,#7b2ff7,#f9a825,#ff8a50);
+padding:28px;
 text-align:center;
-font-size:34px;
+font-size:36px;
 font-weight:bold;
+color:white;
 }
 
 /* NAV */
@@ -28,235 +29,340 @@ display:flex;
 flex-wrap:wrap;
 justify-content:center;
 gap:10px;
-padding:15px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
+padding:12px;
+background:white;
 position:sticky;
 top:0;
+border-bottom:1px solid #eee;
+z-index:10;
 }
 
 .nav button{
 padding:12px 16px;
 border:none;
 border-radius:12px;
+background:#f2f3f7;
 cursor:pointer;
-background:rgba(255,255,255,0.08);
-color:white;
 font-weight:bold;
 transition:0.3s;
 }
 
 .nav button:hover{
 background:#7b2ff7;
-transform:scale(1.1);
-}
-
-/* PAGES */
-.page{display:none;padding:25px;}
-.page.active{display:block;}
-
-/* COLORS */
-.purple{color:#b388ff;}
-.yellow{color:#ffd54f;}
-.orange{color:#ff8a50;}
-
-/* CARDS */
-.card{
-background:rgba(255,255,255,0.06);
-border:1px solid rgba(255,255,255,0.1);
-padding:15px;
-border-radius:16px;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-6px);
-box-shadow:0 0 20px rgba(123,47,247,0.4);
-}
-
-/* PROFILE */
-.profileBox{
-background:rgba(255,255,255,0.06);
-border-radius:16px;
-padding:20px;
-border:1px solid rgba(255,255,255,0.1);
-}
-
-input{
-width:100%;
-padding:10px;
-margin:5px 0;
-border-radius:10px;
-border:none;
-background:#1c1c2e;
 color:white;
+transform:scale(1.05);
 }
 
-button{
-padding:10px;
-border:none;
-border-radius:10px;
-cursor:pointer;
+/* PAGE */
+.page{
+display:none;
+padding:25px;
+}
+
+.page.active{
+display:block;
+animation:fade 0.3s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* TITLES */
+.title{
+font-size:34px;
 font-weight:bold;
 }
 
-.save{
-background:#7b2ff7;
-color:white;
-width:100%;
-margin-top:10px;
+.purple{color:#7b2ff7;}
+.yellow{color:#f9a825;}
+.orange{color:#ff8a50;}
+
+/* INFO BOX */
+.info{
+background:white;
+padding:20px;
+border-radius:14px;
+border:1px solid #eee;
+font-size:18px;
+line-height:1.7;
 }
 
-.danger{
-background:#ff3d3d;
-color:white;
-width:100%;
-margin-top:10px;
+/* CATEGORIES */
+.category{
+font-size:26px;
+font-weight:bold;
+margin:20px 0 10px;
+color:#7b2ff7;
 }
 
-/* SHOP */
+/* CARDS GRID */
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 gap:15px;
 }
 
+/* CARD */
+.card{
+background:white;
+border-radius:16px;
+padding:15px;
+border:1px solid #eee;
+transition:0.3s;
+box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card img{
+width:100%;
+height:130px;
+object-fit:cover;
+border-radius:12px;
+}
+
+.price{
+font-size:18px;
+font-weight:bold;
+color:#2e7d32;
+margin-top:6px;
+}
+
 .buy{
 width:100%;
 padding:10px;
-border-radius:10px;
 border:none;
-background:linear-gradient(90deg,#7b2ff7,#ff6a00);
+border-radius:12px;
+background:linear-gradient(90deg,#7b2ff7,#f9a825);
 color:white;
 font-weight:bold;
 cursor:pointer;
+margin-top:8px;
+}
+
+/* PROFILE */
+.profile{
+background:white;
+padding:20px;
+border-radius:14px;
+border:1px solid #eee;
+}
+
+/* AUTH */
+.auth{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.authBox{
+background:white;
+padding:20px;
+border-radius:14px;
+width:300px;
+}
+
+.authBox input{
+width:100%;
+padding:10px;
+margin:5px 0;
+border-radius:10px;
+border:1px solid #ddd;
+}
+
+.authBox button{
+width:100%;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#7b2ff7;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* POPUP */
+.popup{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.5);
+}
+
+.popupBox{
+background:white;
+width:400px;
+margin:120px auto;
+padding:20px;
+border-radius:14px;
+text-align:center;
 }
 </style>
 </head>
 
 <body>
 
-<header>🔥 WELLYFUN PREMIUM PANEL</header>
+<header>🔥 WELLYFUN PREMIUM STORE</header>
 
+<!-- AUTH -->
+<div class="auth" id="auth">
+<div class="authBox">
+<h3>Регистрация</h3>
+<input id="nick" placeholder="Ник">
+<input id="email" placeholder="Email">
+<button onclick="register()">Войти</button>
+</div>
+</div>
+
+<!-- NAV -->
 <div class="nav">
 <button onclick="openTab('home')">Главная</button>
 <button onclick="openTab('shop')">Магазин</button>
+<button onclick="openTab('cart')">Корзина</button>
+<button onclick="openTab('support')">Поддержка</button>
+<button onclick="openTab('info')">Инфо</button>
 <button onclick="openTab('profile')">Профиль</button>
-<button onclick="openTab('settings')">Настройки</button>
 </div>
 
 <!-- HOME -->
 <div id="home" class="page active">
-<h1 class="purple">Добро пожаловать 👋</h1>
+<div class="title purple">Добро пожаловать 👋</div>
 <p class="yellow">WellyFun SMP-Анархия</p>
-<p class="orange">PvP • Экономика • Гриф • Кастом предметы</p>
+<p class="orange">Экономика • PvP • Гриф • Кастом предметы</p>
 </div>
 
 <!-- SHOP -->
 <div id="shop" class="page">
 
-<h2 class="purple">🛒 Магазин</h2>
-
+<div class="category">💜 Привилегии</div>
 <div class="cards">
 
 <div class="card">
 <h3>VIP</h3>
-<p class="yellow">199₽</p>
-<button class="buy" onclick="buy('VIP',199)">Купить</button>
+<div class="price">199₽</div>
+<button class="buy">Купить</button>
+</div>
+
+<div class="card">
+<h3>Босс</h3>
+<div class="price">199₽</div>
+<button class="buy">Купить</button>
+</div>
+
+<div class="card">
+<h3>Монарх</h3>
+<div class="price">299₽</div>
+<button class=
+
+
+">Купить</button>
 </div>
 
 <div class="card">
 <h3>Король</h3>
-<p class="orange">599₽</p>
-<button class="buy" onclick="buy('Король',599)">Купить</button>
+<div class="price">599₽</div>
+<button class="buy">Купить</button>
 </div>
 
-<div class="card">
-<h3>Трапка x10</h3>
-<p class="purple">79₽</p>
-<button class="buy" onclick="buy('Трапка',79)">Купить</button>
 </div>
 
+<div class="category">🧩 Ресурсы</div>
+<div class="cards">
+
+<div class="card"><h3>Алмазы</h3><div class="price">20₽</div><button class="buy">Купить</button></div>
+<div class="card"><h3>Геплы</h3><div class="price">40₽</div><button class="buy">Купить</button></div>
+<div class="card"><h3>Тотем</h3><div class="price">30₽</div><button class="buy">Купить</button></div>
+
+</div>
+
+<div class="category">⚔ PvP</div>
+<div class="cards">
+
+<div class="card"><h3>Трапка x10</h3><div class="price">79₽</div><button class="buy">Купить</button></div>
+<div class="card"><h3>Nuke</h3><div class="price">99₽</div><button class="buy">Купить</button></div>
+
+</div>
+
+<div class="category">✨ Редкие</div>
+<div class="cards">
+
+<div class="card"><h3>Талисман Монарха</h3><div class="price">139₽</div><button class="buy">Купить</button></div>
+
+</div>
+
+</div>
+
+<!-- CART -->
+<div id="cart" class="page">
+<h2 class="purple">Корзина</h2>
+<div id="cartItems"></div>
+</div>
+
+<!-- SUPPORT -->
+<div id="support" class="page">
+<h2 class="orange">Поддержка</h2>
+<p>Discord: скоро</p>
+</div>
+
+<!-- INFO -->
+<div id="info" class="page">
+<div class="info">
+<div class="title purple">📘 Информация сервера</div>
+
+<p>✔ WellyFun SMP-Anarchy</p>
+<p>✔ Экономика + PvP + Гриф</p>
+<p>✔ Кастом предметы и чары</p>
+<p>✔ Аукцион</p>
+<p>✔ Регулярный вайп</p>
+<p>✔ Версия 1.21.11</p>
+
+<p class="orange">🔥 Скоро крупные обновления!</p>
 </div>
 </div>
 
 <!-- PROFILE -->
 <div id="profile" class="page">
-
 <h2 class="purple">👤 Профиль</h2>
-
-<div class="profileBox">
-<p><b>Ник:</b> <span id="pNick"></span></p>
-<p><b>Email:</b> <span id="pEmail"></span></p>
-<p><b>Покупки:</b></p>
-<div id="purchases"></div>
+<div class="profile" id="profileBox">Не авторизован</div>
 </div>
 
-</div>
-
-<!-- SETTINGS -->
-<div id="settings" class="page">
-
-<h2 class="orange">⚙ Настройки аккаунта</h2>
-
-<div class="profileBox">
-
-<input id="nick" placeholder="Ник">
-<input id="email" placeholder="Email">
-
-<button class="save" onclick="save()">Сохранить</button>
-<button class="danger" onclick="resetData()">Выйти / Сброс</button>
-
+<!-- POPUP -->
+<div class="popup" id="popup">
+<div class="popupBox">
+<h3 id="pname"></h3>
+<p id="pprice"></p>
+<button class="buy">Купить</button>
+<button onclick="closePopup()">Закрыть</button>
 </div>
 </div>
 
 <script>
 
-let user={
-nick:"Игрок",
-email:"не задано",
-purchases:[]
-};
+function register(){
+let nick=document.getElementById("nick").value;
+document.getElementById("profileBox").innerHTML="Ник: "+nick;
+document.getElementById("auth").style.display="none";
+}
 
 function openTab(id){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 document.getElementById(id).classList.add("active");
-updateProfile();
 }
-
-function save(){
-user.nick=document.getElementById("nick").value;
-user.email=document.getElementById("email").value;
-updateProfile();
-alert("Сохранено");
-}
-
-function resetData(){
-user={nick:"Игрок",email:"не задано",purchases:[]};
-updateProfile()
-
-
-}
-
-function buy(name,price){
-user.purchases.push(`${name} - ${price}₽`);
-updateProfile();
-alert("Куплено: "+name);
-}
-
-function updateProfile(){
-document.getElementById("pNick").innerText=user.nick;
-document.getElementById("pEmail").innerText=user.email;
-
-document.getElementById("purchases").innerHTML=
-user.purchases.map(p=>`<div>✔ ${p}</div>`).join("");
-}
-
-updateProfile();
 
 </script>
 
 </body>
-</html>;
+</html>"buy
+
+
 
 
