@@ -10,7 +10,6 @@ body{
 margin:0;
 font-family:Arial;
 background:#f6f7fb;
-color:#111;
 }
 
 /* HEADER */
@@ -23,11 +22,49 @@ font-weight:bold;
 color:white;
 }
 
+/* AUTH */
+.auth{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.6);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+.auth-box{
+background:white;
+padding:20px;
+border-radius:14px;
+width:300px;
+text-align:center;
+}
+
+.auth-box input{
+width:90%;
+padding:10px;
+margin:5px 0;
+border-radius:10px;
+border:1px solid #ccc;
+}
+
+.auth-box button{
+width:100%;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#7b2ff7;
+color:white;
+cursor:pointer;
+}
+
 /* TABS */
 .tabs{
 display:flex;
-flex-wrap:wrap;
 justify-content:center;
+flex-wrap:wrap;
 gap:10px;
 padding:15px;
 }
@@ -39,12 +76,6 @@ border-radius:12px;
 border:1px solid #eee;
 cursor:pointer;
 font-weight:bold;
-transition:0.3s;
-font-size:16px;
-}
-
-.tab:hover{
-transform:scale(1.08);
 }
 
 .tab.active{
@@ -52,116 +83,84 @@ background:#111;
 color:white;
 }
 
-/* PAGES */
+/* PAGE */
 .page{
 display:none;
-padding:25px;
-font-size:22px;
+padding:20px;
 }
 
 .page.active{
 display:block;
-animation:fade 0.3s ease;
 }
 
-/* BIG TEXT COLORS */
-h1,h2{
-font-size:36px;
+/* CATEGORIES */
+.category{
+margin-top:20px;
+font-size:26px;
+font-weight:bold;
+color:#7b2ff7;
 }
-
-.purple{color:#7b2ff7;}
-.yellow{color:#f9a825;}
-.orange{color:#ff8a50;}
 
 /* CARDS */
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 gap:15px;
+margin-top:10px;
 }
 
 .card{
 background:white;
-padding:15px;
 border-radius:14px;
+padding:15px;
 border:1px solid #eee;
-cursor:pointer;
 transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-8px) scale(1.03);
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
+transform:translateY(-6px);
 }
 
-/* IMAGE */
 .card img{
 width:100%;
-height:140px;
+height:130px;
 object-fit:cover;
 border-radius:12px;
-margin-bottom:10px;
 }
 
-/* PRICE */
 .price{
 color:#2e7d32;
+font-size:18px;
 font-weight:bold;
-font-size:20px;
 margin-top:8px;
 }
 
-/* BUTTON */
 .buy-btn{
 width:100%;
-padding:12px;
+padding:10px;
+margin-top:8px;
 border:none;
-border-radius:12px;
-cursor:pointer;
-font-weight:bold;
+border-radius:10px;
 background:linear-gradient(90deg,#7b2ff7,#f9a825);
 color:white;
-transition:0.3s;
+font-weight:bold;
+cursor:pointer;
 }
 
-.buy-btn:hover{
-transform:scale(1.05);
-background:linear-gradient(90deg,#ff8a50,#f9a825);
-}
-
-/* POPUP */
-.popup{
-display:none;
-position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.5);
-}
-
-.popup-box{
-background:white;
-width:400px;
-margin:120px auto;
-padding:20px;
-border-radius:14px;
-text-align:center;
-}
-
-/* CHAT (КРАСИВЫЙ КАК ТЫ ХОТЕЛ) */
+/* CHAT */
 .chat{
-background:white;
-height:320px;
+height:300px;
 overflow:auto;
-padding:15px;
-border-radius:14px;
+background:white;
+border-radius:12px;
+padding:10px;
 border:1px solid #eee;
 }
 
 .msg{
-margin:8px 0;
+margin:5px;
 padding:10px;
 border-radius:10px;
-font-size:18px;
 }
 
 .user{background:#7b2ff7;color:white;text-align:right;}
@@ -175,19 +174,17 @@ margin-top:10px;
 
 .chat-input input{
 flex:1;
-padding:12px;
+padding:10px;
 border-radius:10px;
 border:1px solid #ccc;
-font-size:16px;
 }
 
 .chat-input button{
-padding:12px 16px;
+padding:10px 15px;
 border:none;
 border-radius:10px;
 background:#f9a825;
 font-weight:bold;
-cursor:pointer;
 }
 
 /* PROFILE */
@@ -196,12 +193,6 @@ background:white;
 padding:20px;
 border-radius:14px;
 border:1px solid #eee;
-font-size:20px;
-}
-
-@keyframes fade{
-from{opacity:0;transform:translateY(10px);}
-to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
@@ -209,6 +200,16 @@ to{opacity:1;transform:translateY(0);}
 <body>
 
 <header>🔥 WELLYFUN SHOP</header>
+
+<!-- AUTH -->
+<div class="auth" id="auth">
+<div class="auth-box">
+<h3>Регистрация</h3>
+<input id="nick" placeholder="Ник">
+<input id="pass" placeholder="Пароль">
+<button onclick="register()">Войти</button>
+</div>
+</div>
 
 <div class="tabs">
 <button class="tab active" onclick="openTab('home',event)">Главная</button>
@@ -221,175 +222,121 @@ to{opacity:1;transform:translateY(0);}
 
 <!-- HOME -->
 <div id="home" class="page active">
-<h1 class="purple">Добро пожаловать 👋</h1>
-<p class="yellow">SMP-Анархия сервер WellyFun</p>
-<p class="orange">Экономика • PvP • Гриф • Кастом предметы</p>
+<h1>Добро пожаловать 👋</h1>
+<p>WellyFun SMP-Анархия сервер</p>
 </div>
 
 <!-- SHOP -->
 <div id="shop" class="page">
-<h2 class="purple">🛒 Магазин</h2>
 
+<div class="category">💜 Привилегии</div>
 <div class="cards">
 
-<!-- VIP -->
 <div class="card">
-<img src="https://via.placeholder.com/300x140">
-<h3 class="yellow">VIP</h3>
-<p>Базовая привилегия</p>
+<img src="https://via.placeholder.com/300x130">
+<h3>VIP</h3>
 <div class="price">199₽</div>
-<button class="buy-btn" onclick="buy('VIP','Базовая привилегия','199₽')">Купить</button>
+<button class="buy-btn">Купить</button>
 </div>
 
-<!-- BOSS -->
 <div class="card">
-<img src="https://via.placeholder.com/300x140">
-<h3 class="orange">Босс</h3>
-<p>Усиленная привилегия</p>
-<div class="price
-
-
-</div>
-<button class="buy-btn" onclick="buy('Босс','Усиленная привилегия','199₽')">Купить</button>
+<img src="https://via.placeholder.com/300x130">
+<h3>Босс</h3>
+<div class="price">199₽</div>
+<button class="buy-btn">Купить</button>
 </div>
 
-<!-- MONARCH -->
 <div class="card">
-<img src="https://via.placeholder.com/300x140">
-<h3 class="purple">Монарх</h3>
-<p>Средний донат</p>
+<img src="https://via.placeholder.com/300x130">
+<h3>Монарх</h3>
 <div class="price">299₽</div>
-<button class="buy-btn" onclick="buy('Монарх','Средний донат','299₽')">Купить</button>
-</div>
-
-<!-- KING -->
-<div class="card">
-<img src="https://via.placeholder.com/300x140">
-<h3 class="yellow">Король</h3>
-<p>Топ донат</p>
-<div class="price">599₽</div>
-<button class="buy-btn" onclick="buy('Король','Топ донат','599₽')">Купить</button>
-</div>
-
-<!-- RESOURCES -->
-<div class="card">
-<img src="https://via.placeholder.com/300x140">
-<h3 class="orange">Алмазы</h3>
-<p>Экономика</p>
-<div class="price">20₽</div>
-<button class="buy-btn" onclick="buy('Алмазы','Ресурс','20₽')">Купить</button>
+<button class="buy-btn">Купить</button>
 </div>
 
 <div class="card">
-<img src="https://via.placeholder.com/300x140">
-<h3 class="purple">Геплы</h3>
-<p>PvP ресурс</p>
-<div class="price">40₽</div>
-<button class="buy-btn" onclick="buy('Геплы','PvP ресурс','40₽')">Купить</button>
-</div>
+<img src="https://via.placeholder.com/300x130">
+<h3>Король</h3>
+<div
 
-<div class="card">
-<img src="https://via.placeholder.com/300x140">
-<h3 class="yellow">Тотем</h3>
-<p>Спасение от смерти</p>
-<div class="price">30₽</div>
-<button class="buy-btn" onclick="buy('Тотем','Спасение','30₽')">Купить</button>
-</div>
 
-<!-- PVP -->
-<div class="card">
-<img src="https://via.placeholder.com/300x140">
-<h3 class="purple">Трапка x10</h3>
-<p>Обсидиановая PvP коробка</p>
-<div class="price">79₽</div>
-<button class="buy-btn" onclick="buy('Трапка','PvP','79₽')">Купить</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/300x140">
-<h3 class="orange">Nuke</h3>
-<p>Разрушение базы</p>
-<div class="price">99₽</div>
-<button class="buy-btn" onclick="buy('Nuke','Разрушение','99₽')">Купить</button>
-</div>
-
-<!-- SPECIAL -->
-<div class="card">
-<img src="https://via.placeholder.com/300x140">
-<h3 class="yellow">Талисман Монарха</h3>
-<p>Редкий предмет</p>
-<div class="price">139₽</div>
-<button class="buy-btn" onclick="buy('Талисман','Редкий','139₽')">Купить</button>
+lass="price">599₽</div>
+<button class="buy-btn">Купить</button>
 </div>
 
 </div>
+
+<div class="category">🧩 Ресурсы</div>
+<div class="cards">
+
+<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Алмазы</h3><div class="price">20₽</div><button class="buy-btn">Купить</button></div>
+<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Геплы</h3><div class="price">40₽</div><button class="buy-btn">Купить</button></div>
+<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Тотем</h3><div class="price">30₽</div><button class="buy-btn">Купить</button></div>
+
+</div>
+
+<div class="category">⚔ PvP</div>
+<div class="cards">
+
+<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Трапка x10</h3><div class="price">79₽</div><button class="buy-btn">Купить</button></div>
+<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Nuke</h3><div class="price">99₽</div><button class="buy-btn">Купить</button></div>
+
+</div>
+
+<div class="category">✨ Редкие</div>
+<div class="cards">
+
+<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Талисман Монарха</h3><div class="price">139₽</div><button class="buy-btn">Купить</button></div>
+
+</div>
+
 </div>
 
 <!-- CART -->
 <div id="cart" class="page">
-<h2 class="purple">🛒 Корзина</h2>
+<h2>Корзина</h2>
 <div id="cartItems"></div>
+
+<h3>💳 Оплата</h3>
+<button class="buy-btn">Карта</button>
+<button class="buy-btn">СБП</button>
+<button class="buy-btn">Crypto</button>
 </div>
 
 <!-- SUPPORT -->
 <div id="support" class="page">
-
-<h2 class="orange">🆘 Поддержка</h2>
+<h2>Поддержка</h2>
 
 <div class="chat" id="chat">
-<div class="msg bot">Привет! Напиши проблему 👇</div>
+<div class="msg bot">Напиши проблему 👇</div>
 </div>
 
 <div class="chat-input">
-<input id="msg" placeholder="Сообщение...">
+<input id="msg">
 <button onclick="sendMsg()">Отправить</button>
 </div>
-
 </div>
 
 <!-- INFO -->
 <div id="info" class="page">
-
-<h2 class="purple">📘 Информация</h2>
-
-<p class="yellow">Режим: SMP-Анархия</p>
-<p class="orange">Экономика + PvP + гриф</p>
-<p>✔ кастом предметы</p>
-<p>✔ аукцион</p>
-<p>✔ регулярный вайп</p>
-<p>✔ версия 1.21.11</p>
-
+<h2>Информация</h2>
+<p>SMP-Анархия</p>
+<p>Экономика + PvP + гриф</p>
+<p>Версия 1.21.11</p>
 </div>
 
 <!-- PROFILE -->
 <div id="profile" class="page">
-
-<h2 class="purple">👤 Профиль</h2>
-
-<div class="profile">
-<p>Ник: Player</p>
-<p>Баланс: 0₽</p>
-<p>Покупки: 0</p>
-<p>Привилегия: Нет</p>
-</div>
-
-</div>
-
-<!-- POPUP -->
-<div class="popup" id="popup">
-<div class="popup-box">
-<h2 id="pname" class="purple"></h2>
-<p id="pdesc"></p>
-<h2 class="yellow" id="pprice"></h2>
-
-<button class="buy-btn" onclick="addToCart()">Добавить в корзину</button>
-<button class="buy-btn" onclick="closePopup()">Закрыть</button>
-</div>
+<h2>Профиль</h2>
+<p id="userInfo">Не авторизован</p>
 </div>
 
 <script>
 
-let currentItem={};
+function register(){
+let nick=document.getElementById("nick").value;
+document.getElementById("userInfo").innerText="Ник: "+nick;
+document.getElementById("auth").style.display="none";
+}
 
 function openTab(id,event){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
@@ -398,44 +345,30 @@ document.getElementById(id).classList.add("active");
 event.target.classList.add("active");
 }
 
-function buy(name,desc,price){
-currentItem={name,desc,price};
-document.getElementById("pname").innerText=name;
-document.getElementById("pdesc").innerText=desc;
-document.getElementById("pprice").innerText=price;
-document.getElementById("popup").style.display="block";
-}
-
-function addToCart(){
-let cart=document.getElementById("cartItems");
-cart.innerHTML+=`<div style="background:white;padding:10px;border-radius:10px;margin:8px 0">
-<b>${currentItem.name}</b> — ${
-
-
-currentItem.price}
-</div>`;
-alert("Добавлено в корзину");
-}
-
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
-
 function sendMsg(){
 let input=document.getElementById("msg");
 if(!input.value) return;
 
-let chat=document.getElementById("chat");
-chat.innerHTML+=`<div class="msg user">${input.value}</div>`;
-chat.innerHTML+=`<div class="msg bot">Мы скоро ответим 👍</div>`;
+document.getElementById("chat").innerHTML+=
+`<div class="msg user">${input.value}</div>
+<div class="msg bot">Мы ответим скоро 👍</div>`;
 
 input.value="";
-chat.scrollTop=chat.scrollHeight;
 }
 
 </script>
 
 </body>
-</html>">199₽
+</html> c
 
 
+
+
+
+Новый интерфейс!Новый интерфейс! Появились папки и фоны. А знаете, что ещё?
+Все
+Непрочитанные
+Архив
+Бизнес-уведомления
+Beastik Be
+Beastik Be
