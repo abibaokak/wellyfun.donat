@@ -1,65 +1,69 @@
 body {
   margin: 0;
   font-family: Arial;
-  background: #f5f7fb;
-  color: #222;
+  background: #f5f6fa; /* светлый фон */
+  color: #1a1a1a;      /* тёмный текст */
 }
 
-/* вкладки */
-.tabs {
+/* верхнее меню */
+.nav {
+  position: sticky;
+  top: 0;
+  background: white;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
   padding: 15px;
-  background: white;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.tabs button {
-  padding: 10px 15px;
-  border: none;
-  background: #eee;
+/* ссылки меню */
+.nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 12px;
   border-radius: 8px;
-  cursor: pointer;
 }
 
-.tabs button:hover {
-  background: gold;
+.nav a:hover {
+  background: #ffe066; /* мягкий жёлтый */
 }
 
-/* карточки (не трогаем контент, только вид) */
-.card {
+/* блоки страницы */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 30px;
+}
+
+/* карточки товаров (НЕ ТРОГАЕМ HTML) */
+.item, .card, .product {
   background: white;
-  border: 1px solid #ddd;
+  border: 1px solid #e5e5e5;
   border-radius: 12px;
   padding: 15px;
-  cursor: pointer;
+  margin: 10px 0;
   transition: 0.2s;
 }
 
-.card:hover {
+/* эффект наведения */
+.item:hover, .card:hover, .product:hover {
   transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
 
-/* popup */
-.popup {
-  display: none;
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background: rgba(0,0,0,0.4);
+/* кнопки */
+button {
+  background: #ffd43b;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-.popup-content {
-  background: white;
-  width: 320px;
-  margin: 120px auto;
-  padding: 20px;
-  border-radius: 12px;
+button:hover {
+  background: #ffb703;
 }
-
-
 
 
