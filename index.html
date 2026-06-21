@@ -10,10 +10,8 @@ margin:0;
 font-family:Arial;
 background:#0b0f1a;
 color:white;
-overflow-x:hidden;
 }
 
-/* TOP BAR */
 .topbar{
 display:flex;
 justify-content:space-between;
@@ -22,7 +20,6 @@ padding:15px;
 background:#11182a;
 position:sticky;
 top:0;
-z-index:10;
 }
 
 .logo{
@@ -31,7 +28,6 @@ font-weight:bold;
 font-size:20px;
 }
 
-/* MENU */
 .menu button{
 margin:5px;
 padding:10px;
@@ -48,7 +44,6 @@ background:orange;
 transform:scale(1.05);
 }
 
-/* SECTIONS */
 .page{display:none;padding:20px;animation:fade .5s ease;}
 .active{display:block;}
 
@@ -57,7 +52,6 @@ from{opacity:0;transform:translateY(10px);}
 to{opacity:1;}
 }
 
-/* HOME */
 .glow{
 font-size:42px;
 background:linear-gradient(90deg,orange,red,purple,blue,green);
@@ -65,7 +59,6 @@ background:linear-gradient(90deg,orange,red,purple,blue,green);
 color:transparent;
 }
 
-/* CARDS */
 .card{
 background:#141c33;
 padding:15px;
@@ -76,10 +69,8 @@ transition:0.3s;
 
 .card:hover{
 transform:scale(1.03);
-box-shadow:0 0 15px rgba(255,165,0,0.3);
 }
 
-/* SHOP */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -95,14 +86,12 @@ padding:10px;
 margin:5px;
 border-radius:10px;
 cursor:pointer;
-transition:0.3s;
 }
 
 .cats button:hover{
 background:orange;
 }
 
-/* PROFILE */
 .profile{
 display:flex;
 gap:20px;
@@ -157,12 +146,13 @@ background:orange;
 transform:translateX(5px);
 }
 
-/* MODAL */
 .modal{
 display:none;
 position:fixed;
-top:0;left:0;
-width:100%;height:100%;
+top:0;
+left:0;
+width:100%;
+height:100%;
 background:rgba(0,0,0,0.7);
 justify-content:center;
 align-items:center;
@@ -173,15 +163,6 @@ background:#141c33;
 padding:20px;
 border-radius:15px;
 width:300px;
-}
-
-/* CHAT */
-.chat{
-height:250px;
-overflow:auto;
-background:#11182a;
-padding:10px;
-border-radius:10px;
 }
 </style>
 </head>
@@ -204,11 +185,9 @@ border-radius:10px;
 <!-- HOME -->
 <section id="home" class="page active">
 <h1 class="glow">Добро пожаловать на WellyFun</h1>
-
 <div class="card">
-<h3>🔥 Minecraft Anarchy-SMP</h3>
-<p>Орбитальные пушки, аукцион, ивенты, автошахта</p>
-<p>Версия: 1.21.11</p>
+<p>Анархия SMP сервер</p>
+<p>Орбитальные пушки</p>
 </div>
 </section>
 
@@ -219,7 +198,6 @@ border-radius:10px;
 <button onclick="filter('all')">Все</button>
 <button onclick="filter('vip')">Привилегии</button>
 <button onclick="filter('res')">Ресурсы</button>
-<button onclick="filter('orb')">Пушки</button>
 <button onclick="filter('other')">Разное</button>
 </div>
 
@@ -230,40 +208,31 @@ border-radius:10px;
 <!-- SUPPORT -->
 <section id="support" class="page">
 <h2>Поддержка</h2>
-<div class="chat" id="chat"></div>
-<input id="msg" placeholder="Написать...">
+<div class="card" id="chat"></div>
+<input id="msg" placeholder="Сообщение">
 <button onclick="send()">Отправить</button>
 </section>
 
 <!-- INFO -->
 <section id="info" class="page">
-<h1 style="text-align:center;color:orange;">
-Добро пожаловать на сервер WELLYFUN
-</h1>
-
 <div class="card">
-<p>✔ Анархия-SMP режим</p>
-<p>✔ Орбитальные пушки</p>
-<p>✔ Аукцион и экономика</p>
-<p>✔ Ивенты и обновления</p>
-<p>✔ Версия 1.21.11</p>
+<h2>Информация</h2>
+<p>Версия 1.21.11</p>
 </div>
 </section>
 
 <!-- PROFILE -->
-<section id=
-
-
-" class="page">
+<section id="profile" class="page">
 
 <div class="profile">
 
 <div class="sidebar">
 <div class="skin"></div>
 <h3 id="nick">Player</h3>
-<button>Баланс</button>
-<button>История</button>
-<button>Настройки</button>
+<button onclick="editNick()">Редактировать</button>
+<button onclick="topUp()">Пополнить</button>
+<button onclick="historyF()">История</button>
+<button onclick="settings()">Настройки</button>
 </div>
 
 <div class="main">
@@ -278,12 +247,6 @@ border-radius:10px;
 </div>
 </div>
 
-<div class="actions">
-<div>Редактировать</div>
-<div>Пополнить баланс</div>
-<div>Покупки</div>
-</div>
-
 </div>
 </div>
 
@@ -292,9 +255,20 @@ border-radius:10px;
 <!-- AUTH -->
 <section id="auth" class="page">
 <h2>Вход</h2>
-<input id="email" placeholder="Email">
+
+<input
+
+
+"email" placeholder="Email">
 <input id="pass" placeholder="Пароль">
+
+<h3>Регистрация</h3>
+<input id="regEmail" placeholder="Email">
+<input id="regNick" placeholder="Minecraft ник">
+<input id="regPass" placeholder="Пароль">
+
 <button onclick="login()">Войти</button>
+<button onclick="register()">Регистрация</button>
 </section>
 
 <!-- MODAL -->
@@ -303,7 +277,9 @@ border-radius:10px;
 <h3 id="mname"></h3>
 <p id="mdesc"></p>
 <p id="mprice"></p>
+
 <button onclick="buy()">Перейти к оплате</button>
+<button onclick="closeModal()">Закрыть</button>
 </div>
 </div>
 
@@ -311,25 +287,14 @@ border-radius:10px;
 let user=null;
 let current=null;
 
-/* ТОВАРЫ */
+/* SHOP ITEMS */
 let items=[
-{name:"VIP",price:59,type:"vip",desc:"Базовая привилегия"},
-{name:"Premium",price:99,type:"vip",desc:"Улучшенная привилегия"},
-{name:"Boss",price:159,type:"vip",desc:"Сильная привилегия"},
-{name:"Winner",price:499,type:"vip",desc:"Имба: флай"},
-{name:"King",price:899,type:"vip",desc:"Лучшая привилегия"},
-{name:"Stazher",price:1199,type:"vip",desc:"Путь до админа"},
-
-{name:"Геплы",price:49,type:"res",desc:"Золотые яблоки"},
+{name:"VIP",price:59,type:"vip",desc:"База"},
+{name:"Winner",price:499,type:"vip",desc:"Флай"},
+{name:"Король",price:899,type:"vip",desc:"Топ"},
+{name:"Геплы",price:49,type:"res",desc:"Яблоки"},
 {name:"Незерит",price:99,type:"res",desc:"Слитки"},
-{name:"Трапка",price:79,type:"res",desc:"Обсидиановая коробка"},
-
-{name:"Nuke",price:100,type:"orb",desc:"Кольца TNT"},
-{name:"Stab",price:89,type:"orb",desc:"До бедрока"},
-
-{name:"Разбан",price:199,type:"other",desc:"Снятие бана"},
-{name:"Размут",price:159,type:"other",desc:"Снятие мута"},
-{name:"Иммунитет",price:299,type:"other",desc:"Неделя без правил"}
+{name:"Разбан",price:199,type:"other",desc:"Снятие бана"}
 ];
 
 function tab(id){
@@ -337,7 +302,6 @@ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
-/* SHOP */
 function render(type="all"){
 let box=document.getElementById("items");
 box.innerHTML="";
@@ -365,30 +329,71 @@ document.getElementById("mdesc").innerText=desc;
 document.getElementById("modal").style.display="flex";
 }
 
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
 function buy(){
-alert("Переход к оплате (подключишь FreeKassa)");
+alert("Переход к оплате");
 }
 
 /* CHAT */
 function send(){
-let chat=document.getElementById("chat");
-let msg=document.getElementById("msg");
-chat.innerHTML+=`<div>Ты: ${msg.value}</div>`;
-msg.value="";
+let msg=document.getElementById("msg").value;
+document.getElementById("chat").innerHTML+="<div>Ты: "+msg+"</div>";
+document.getElementById("msg").value="";
 }
 
 /* LOGIN */
 function login(){
-user={email:document.getElementById("email").value};
-document.getElementById("nick").innerText="Player";
-document.getElementById("username").innerText="Player";
+if(!document.getElementById("email").value || !document.getElementById("pass").value){
+alert("Заполни поля");
+return;
+}
 alert("Вход выполнен");
+}
+
+/* REGISTER */
+function register(){
+let e=document.getElementById("regEmail").value;
+let n=document.getElementById("regNick").value;
+let p=document.getElementById("regPass").value;
+
+if(!e || !n || !p){
+alert("Заполни все поля");
+return;
+}
+
+user={email:e,nick:n};
+document.getElementById("nick").innerText=n;
+document.getElementById("username").innerText=n;
+
+alert("Регистрация успешна");
+}
+
+/* PROFILE BUTTONS */
+function editNick(){
+let n=prompt("Новый ник:");
+if(n){
+document.getElementById("nick").innerText=n;
+document.getElementById("username").innerText=n;
+}
+}
+
+function topUp(){
+alert("Пополнение пока не подключено");
+}
+
+function historyF(){
+alert("История покупок (пока нет базы)");
+}
+
+function settings(){
+alert("Настройки профиля (скоро)");
 }
 </script>
 
 </body>
-</html>"profile
-
-
+</html> id=
 
 
