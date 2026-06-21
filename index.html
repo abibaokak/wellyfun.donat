@@ -1,136 +1,101 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<title>Донат-магазин сервера</title>
+<div id="donate" class="page">
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #0f0f0f;
-  color: white;
-  text-align: center;
-}
+<h1 class="title">
+💎 Магазин
+</h1>
 
-header {
-  padding: 30px;
-  background: #1c1c1c;
-}
-
-h1 {
-  color: gold;
-}
-
-.section-title {
-  margin-top: 40px;
-  color: #00ffcc;
-  font-size: 22px;
-}
-
-.shop {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding: 20px;
-}
-
-.card {
-  background: #1e1e1e;
-  padding: 15px;
-  border-radius: 12px;
-  width: 220px;
-}
-
-.price {
-  color: #00ff99;
-  font-weight: bold;
-}
-
-button {
-  margin-top: 10px;
-  padding: 10px;
-  background: gold;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 6px;
-}
-
-button:hover {
-  background: orange;
-}
-</style>
-
-</head>
-
-<body>
-
-<header>
-  <h1>💎 Магазин сервера</h1>
-  <p>Покупай привилегии, ресурсы и предметы</p>
-</header>
-
-<!-- ПРИВИЛЕГИИ -->
-<div class="section-title">👑 Привилегии</div>
 <div class="shop">
 
-  <div class="card"><h2>VIP</h2><p class="price">60₽</p><button>Купить</button></div>
-  <div class="card"><h2>Premium</h2><p class="price">99₽</p><button>Купить</button></div>
-  <div class="card"><h2>Титан</h2><p class="price">159₽</p><button>Купить</button></div>
-  <div class="card"><h2>Босс</h2><p class="price">199₽</p><button>Купить</button></div>
-  <div class="card"><h2>Монарх</h2><p class="price">299₽</p><button>Купить</button></div>
-  <div class="card"><h2>Король</h2><p class="price">599₽</p><button>Купить</button></div>
+<!-- ПРИВИЛЕГИИ -->
 
+<div class="card" onclick="buy('VIP','Привилегия VIP','199₽')">
+<h2 class="vip">VIP</h2>
+<p>Донат статус</p>
+<div class="price">199₽</div>
+</div>
+
+<div class="card" onclick="buy('Босс','Привилегия Босс','199₽')">
+<h2 class="king">👑 Босс</h2>
+<p>Особый статус</p>
+<div class="price">199₽</div>
+</div>
+
+<div class="card" onclick="buy('Монарх','Привилегия Монарх','299₽')">
+<h2 class="king">👑 Монарх</h2>
+<p>Расширенные возможности</p>
+<div class="price">299₽</div>
+</div>
+
+<div class="card" onclick="buy('Король','Максимальная привилегия','599₽')">
+<h2 class="king">🔥 Король</h2>
+<p>Топовый статус</p>
+<div class="price">599₽</div>
 </div>
 
 <!-- РЕСУРСЫ -->
-<div class="section-title">📦 Ресурсы</div>
-<div class="shop">
 
-  <div class="card"><h2>Стак геплов</h2><p class="price">40₽</p><button>Купить</button></div>
-  <div class="card"><h2>Стак алмазов</h2><p class="price">20₽</p><button>Купить</button></div>
-  <div class="card"><h2>Nuke пушка</h2><p class="price">99₽</p><button>Купить</button></div>
+<div class="card" onclick="buy('Стак геплов','Золотые яблоки для игры','40₽')">
+<h2 class="item">🍎 Стак геплов</h2>
+<div class="price">40₽</div>
+</div>
 
+<div class="card" onclick="buy('Стак алмазов','Алмазы для выживания','20₽')">
+<h2 class="item">💎 Стак алмазов</h2>
+<div class="price">20₽</div>
+</div>
+
+<div class="card" onclick="buy('Зачарованные геплы','16 зачарованных золотых яблок','59₽')">
+<h2 class="vip">✨ Геплы x16</h2>
+<div class="price">59₽</div>
+</div>
+
+<!-- ОРУЖИЕ -->
+
+<div class="card" onclick="buy('Nuke','Орбитальная пушка','99₽')">
+<h2 class="item">💣 Nuke</h2>
+<p>Кастомное оружие</p>
+<div class="price">99₽</div>
+</div>
+
+<!-- ТРАПКИ -->
+
+<div class="card" onclick="buy('Трапка','10 штук трапок','79₽')">
+<h2 class="item">🧱 Трапка x10</h2>
+<div class="price">79₽</div>
+</div>
+
+<div class="card" onclick="buy('Пласт','10 штук пластов','69₽')">
+<h2 class="item">🧱 Пласт x10</h2>
+<div class="price">69₽</div>
+</div>
+
+<!-- ШАБЛОНЫ -->
+
+<div class="card" onclick="buy('Шаблоны тишины','8 шаблонов тишины','49₽')">
+<h2 class="vip">🧩 Шаблоны тишины x8</h2>
+<div class="price">49₽</div>
+</div>
+
+<div class="card" onclick="buy('Шаблон незеритового улучшения','Шаблон для улучшения брони','49₽')">
+<h2 class="item">🧩 Незеритовый шаблон</h2>
+<div class="price">49₽</div>
 </div>
 
 <!-- ПРЕДМЕТЫ -->
-<div class="section-title">⚔️ Предметы</div>
-<div class="shop">
 
-  <div class="card"><h2>Трапка x10</h2><p class="price">79₽</p><button>Купить</button></div>
-  <div class="card"><h2>Пласт x10</h2><p class="price">69₽</p><button>Купить</button></div>
-  <div class="card"><h2>Шаблон тишина x8</h2><p class="price">49₽</p><button>Купить</button></div>
-  <div class="card"><h2>Незерит улучшение x8</h2><p class="price">49₽</p><button>Купить</button></div>
-  <div class="card"><h2>Зачар геплы x16</h2><p class="price">59₽</p><button>Купить</button></div>
-  <div class="card"><h2>Тотем бессмертия</h2><p class="price">30₽</p><button>Купить</button></div>
-  <div class="card"><h2>Талисман монарха</h2><p class="price">139₽</p><button>Купить</button></div>
+<div class="card" onclick="buy('Тотем бессмертия','Особый предмет защиты','30₽')">
+<h2 class="vip">🟢 Тотем</h2>
+<div class="price">30₽</div>
+</div>
+
+<div class="card" onclick="buy('Талисман Монарха','Редкий донат предмет','139₽')">
+<h2 class="king">✨ Талисман Монарха</h2>
+<div class="price">139₽</div>
+</div>
 
 </div>
 
-<!-- ОТДЕЛКИ -->
-<div class="section-title">🎨 Отделки брони</div>
-<div class="shop">
-
-  <div class="card"><h2>Все отделки брони</h2><p class="price">49₽</p><p>8 штук</p><button>Купить</button></div>
-
 </div>
-
-</body>
-</html>
-
-<body>
-
-<div class="nav">
-  <a href="#home">🏠 Главная</a>
-  <a href="#shop">🛒 Магазин</a>
-  <a href="#info">📘 Инфо</a>
-  <a href="#support">🆘 Поддержка</a>
-</div>
-
-
-
 
 
 
