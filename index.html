@@ -1,26 +1,34 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WellyFun Ultra Pro</title>
+<title>WellyFun Ultra Store</title>
 
 <style>
+:root{
+--bg:#0b0f1a;
+--card:rgba(255,255,255,0.06);
+--stroke:rgba(255,255,255,0.1);
+--accent1:#7b2ff7;
+--accent2:#ffcc00;
+--accent3:#ff6a00;
+}
+
 body{
 margin:0;
 font-family:Arial;
-background:#0b0d15;
+background:var(--bg);
 color:white;
 }
 
 /* HEADER */
 header{
-background:linear-gradient(90deg,#7b2ff7,#ffcc00,#ff6a00);
 padding:30px;
 text-align:center;
 font-size:40px;
-font-weight:bold;
-letter-spacing:1px;
+font-weight:900;
+background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
 }
 
 /* NAV */
@@ -30,10 +38,10 @@ flex-wrap:wrap;
 justify-content:center;
 gap:10px;
 padding:12px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(12px);
 position:sticky;
 top:0;
+backdrop-filter:blur(15px);
+background:rgba(0,0,0,0.3);
 z-index:10;
 }
 
@@ -41,16 +49,16 @@ z-index:10;
 padding:12px 16px;
 border:none;
 border-radius:12px;
-background:rgba(255,255,255,0.08);
+background:var(--card);
 color:white;
 font-weight:bold;
 cursor:pointer;
-transition:0.3s;
+transition:.25s;
 }
 
 .nav button:hover{
 transform:scale(1.1);
-background:#7b2ff7;
+background:var(--accent1);
 }
 
 /* PAGES */
@@ -64,29 +72,44 @@ to{opacity:1;transform:translateY(0);}
 
 /* HERO */
 .hero{
-background:linear-gradient(135deg,#7b2ff7,#ff6a00);
 padding:25px;
-border-radius:16px;
-font-size:18px;
+border-radius:18px;
+background:linear-gradient(135deg,var(--accent1),var(--accent3));
 line-height:1.6;
+font-size:18px;
 }
 
 /* GRID */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 gap:15px;
 margin-top:15px;
 }
 
-/* CARD */
+/* CARD (TOP STYLE) */
 .card{
-background:rgba(255,255,255,0.06);
-border:1px solid rgba(255,255,255,0.1);
-padding:15px;
+background:var(--card);
+border:1px solid var(--stroke);
 border-radius:16px;
+padding:16px;
 cursor:pointer;
-transition:0.3s;
+transition:.25s;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);
+transform:translateX(-100%);
+transition:.5s;
+}
+
+.card:hover::before{
+transform:translateX(100%);
 }
 
 .card:hover{
@@ -95,7 +118,7 @@ box-shadow:0 0 25px rgba(123,47,247,0.4);
 }
 
 .price{
-color:#ffd54f;
+color:var(--accent2);
 font-weight:bold;
 margin-top:6px;
 }
@@ -104,13 +127,13 @@ margin-top:6px;
 .btn{
 width:100%;
 padding:10px;
-margin-top:10px;
 border:none;
 border-radius:12px;
-background:linear-gradient(90deg,#7b2ff7,#ff6a00);
+background:linear-gradient(90deg,var(--accent1),var(--accent3));
 color:white;
 font-weight:bold;
 cursor:pointer;
+margin-top:10px;
 }
 
 /* POPUP */
@@ -118,59 +141,61 @@ cursor:pointer;
 display:none;
 position:fixed;
 inset:0;
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.7);
 }
 
 .popupBox{
-background:#111;
+background:#111827;
 width:420px;
 margin:120px auto;
 padding:20px;
-border-radius:14px;
+border-radius:16px;
+border:1px solid var(--stroke);
 }
 
 /* CHAT */
 .chat{
-height:300px;
+height:320px;
 overflow:auto;
-background:rgba(255,255,255,0.05);
+background:rgba(255,255,255,0.04);
+border-radius:14px;
 padding:10px;
-border-radius:12px;
 }
 
 .msg{padding:8px;margin:6px;border-radius:10px;}
-.user{background:#7b2ff7;text-align:right;}
-.bot{background:#222;}
+.user{background:var(--accent1);text-align:right;}
+.bot{background:#1f2937;}
 
 /* PROFILE */
 .profile{
-background:rgba(255,255,255,0.06);
-padding:20px;
+background:rgba(255,255,255,0.05);
+padding:18px;
 border-radius:14px;
-margin-top:10px;
+border:1px solid var(--stroke);
 }
 </style>
 </head>
 
 <body>
 
-<header>🔥 WELLYFUN ULTRA PRO</header>
+<header>🔥 WELLYFUN ULTRA STORE</header>
 
+<!-- NAV -->
 <div class="nav">
-<button onclick="openTab('home')">Главная</button>
-<button onclick="openTab('shop')">Магазин</button>
-<button onclick="openTab('cart')">Корзина</button>
-<button onclick="openTab('support')">Поддержка</button>
-<button onclick="openTab('profile')">Профиль</button>
+<button onclick="tab('home')">Главная</button>
+<button onclick="tab('shop')">Магазин</button>
+<button onclick="tab('cart')">Корзина</button>
+<button onclick="tab('support')">Поддержка</button>
+<button onclick="tab('profile')">Профиль</button>
 </div>
 
 <!-- HOME -->
 <div id="home" class="page active">
 <div class="hero">
-🔥 WellyFun — топ SMP / Anarchy сервер  
+🔥 WellyFun — топ SMP / Anarchy проект  
 💰 экономика • PvP • гриф • аукцион  
-⚡ кастом предметы и экономика  
-🚀 версия 1.21.11
+⚡ кастом предметы + регулярные вайпы  
+🚀 версия 1.21.11  
 </div>
 </div>
 
@@ -179,24 +204,41 @@ margin-top:10px;
 
 <div class="grid">
 
-<div class="card" onclick="openProduct('VIP','199₽','Базовая привилегия')">
+<div class="card" onclick="openItem('VIP','199₽','Базовая привилегия сервера')">
 VIP <div class="price">199₽</div>
 </div>
 
-<div class="card" onclick="openProduct('Монарх','299₽','Средняя привилегия')">
+<div class="card" onclick="openItem('Монарх','299₽','Средняя привилегия')">
 Монарх <div class="price">299₽</div>
 </div>
 
-<div class="card" onclick="openProduct('Король','599₽','Топ привилегия')">
+<div class="card" onclick="openItem('Король','599₽','Топ привилегия сервера')">
 Король <div class="price">599₽</div>
 </div>
 
-<div class="card" onclick="openProduct('Трапка x10','79₽','PvP ловушки')">
+<div class="card" onclick="openItem('Трапка x10','79₽','Обсидиановая PvP ловушка')">
 Трапка <div class="price">79₽</div>
 </div>
 
+<div class="card" onclick="openItem('Nuke','99₽','Сильнейший взрывной предмет')">
+Nuke <div class="price">99₽</div>
+<
+
+
+v>
+
+<div class="card" onclick="openItem('Геплы','40₽','Стак золотых яблок')">
+Геплы <div class="price">40₽</div>
 </div>
 
+</div>
+
+</div>
+
+<!-- CART -->
+<div id="cart" class="page">
+<h2>🛒 Корзина</h2>
+<div id="cartBox"></div>
 </div>
 
 <!-- SUPPORT -->
@@ -205,10 +247,10 @@ VIP <div class="price">199₽</div>
 <h2>🆘 Поддержка</h2>
 
 <div class="chat" id="chat">
-<div class="msg bot">Опишите проблему 👇</div>
+<div class="msg bot">Здравствуйте! Опишите проблему 👇</div>
 </div>
 
-<input id="msg" placeholder="Сообщение">
+<input id="msg" placeholder="Сообщение" style="width:100%;padding:10px;margin-top:10px;border-radius:10px;border:none;">
 <button class="btn" onclick="send()">Отправить</button>
 
 </div>
@@ -216,61 +258,78 @@ VIP <div class="price">199₽</div>
 <!-- PROFILE -->
 <div id="profile" class="page">
 <h2>👤 Профиль</h2>
-<div class="profile" id="profileBox"></div>
+<div class="profile" id="profileBox">Не авторизован</div>
 </div>
 
 <!-- POPUP -->
 <div class="popup" id="popup">
 <div class="popupBox">
-<h3 id="pname"></h3>
-<p id="pdesc"></p>
-<p id="pprice"></p>
-<button class="btn">Купить</button>
+<h2 id="name"></h2>
+<p id="desc"></p>
+<p id="price"></p>
+<button class="btn" onclick="add()">Добавить в корзину</button>
+<button onclick="closeP()" class="btn">Закрыть</button>
 </div>
 </div>
 
 <script>
 
-let user=JSON.parse(localStorage.getItem("user")
+let current=null;
+let cart=[];
+let user=JSON.parse(localStorage.getItem("user"))||null;
 
-
-ull;
-let currentProduct=null;
-
-function openTab(id){
+function tab(id){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
 document.getElementById(id).classList.add("active");
-renderProfile();
+render();
 }
 
-function openProduct(name,price,desc){
-currentProduct={name,price,desc};
-document.getElementById("pname").innerText=name;
-document.getElementById("pprice").innerText=price;
-document.getElementById("pdesc").innerText=desc;
+function openItem(n,p,d){
+current={n,p,d};
+document.getElementById("name").innerText=n;
+document.getElementById("desc").innerText=d;
+document.getElementById("price").innerText=p;
 document.getElementById("popup").style.display="block";
 }
 
-function send(){
+function closeP(){
+document.getElementById("popup").style.display="none";
+}
+
+function add(){
+cart.push(current);
+closeP();
+renderCart();
+}
+
+function renderCart(){
+document.getElementById("cartBox").innerHTML=
+cart.map(c=>`✔ ${c.n} - ${c.p}`).join("
+");
+
+unction send(){
 let m=document.getElementById("msg").value;
 if(!m) return;
 
 document.getElementById("chat").innerHTML+=
 `<div class="msg user">${m}</div>
-<div class="msg bot">Мы ответим скоро 👍</div>`;
+<div class="msg bot">Мы ответим вам позже 👍</div>`;
 }
 
-function renderProfile(){
-if(!user) return;
+function render(){
+if(user){
 document.getElementById("profileBox").innerHTML=
 `Ник: ${user.nick}
-Emai
-{user.email}`;
+Email
+user.email}`;
 }
+}
+
+render();
 
 </script>
 
 </body>
-</html>)||n
+</html>/di
 
 
