@@ -3,31 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WellyFun Shop</title>
+<title>WellyFun - Premium Shop</title>
 
 <style>
 body{
 margin:0;
 font-family:Arial;
-background:#f6f7fb;
+background:#0b0b12;
+color:white;
 }
 
 /* HEADER */
 header{
-background:linear-gradient(90deg,#7b2ff7,#f9a825,#ff8a50);
+background:linear-gradient(90deg,#7b2ff7,#f9a825,#ff6a00);
 padding:25px;
 text-align:center;
 font-size:34px;
 font-weight:bold;
-color:white;
 }
+
+/* NAV */
+.nav{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:10px;
+padding:15px;
+}
+
+.nav button{
+padding:12px 16px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+background:#1c1c2e;
+color:white;
+font-weight:bold;
+transition:0.3s;
+}
+
+.nav button:hover{
+transform:scale(1.1);
+background:#7b2ff7;
+}
+
+/* PAGE */
+.page{display:none;padding:25px;}
+.page.active{display:block;}
+
+/* TITLE */
+h1,h2{
+font-size:36px;
+}
+
+.purple{color:#b388ff;}
+.yellow{color:#ffd54f;}
+.orange{color:#ff8a50;}
 
 /* AUTH */
 .auth{
 position:fixed;
 top:0;left:0;
 width:100%;height:100%;
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.7);
 display:flex;
 justify-content:center;
 align-items:center;
@@ -35,70 +73,18 @@ z-index:999;
 }
 
 .auth-box{
-background:white;
+background:#111;
 padding:20px;
 border-radius:14px;
 width:300px;
-text-align:center;
 }
 
 .auth-box input{
-width:90%;
-padding:10px;
-margin:5px 0;
-border-radius:10px;
-border:1px solid #ccc;
-}
-
-.auth-box button{
 width:100%;
+margin:5px 0;
 padding:10px;
-border:none;
 border-radius:10px;
-background:#7b2ff7;
-color:white;
-cursor:pointer;
-}
-
-/* TABS */
-.tabs{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:10px;
-padding:15px;
-}
-
-.tab{
-padding:12px 16px;
-background:white;
-border-radius:12px;
-border:1px solid #eee;
-cursor:pointer;
-font-weight:bold;
-}
-
-.tab.active{
-background:#111;
-color:white;
-}
-
-/* PAGE */
-.page{
-display:none;
-padding:20px;
-}
-
-.page.active{
-display:block;
-}
-
-/* CATEGORIES */
-.category{
-margin-top:20px;
-font-size:26px;
-font-weight:bold;
-color:#7b2ff7;
+border:none;
 }
 
 /* CARDS */
@@ -106,269 +92,180 @@ color:#7b2ff7;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 gap:15px;
-margin-top:10px;
 }
 
 .card{
-background:white;
-border-radius:14px;
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.1);
 padding:15px;
-border:1px solid #eee;
+border-radius:16px;
 transition:0.3s;
 }
 
 .card:hover{
 transform:translateY(-6px);
-}
-
-.card img{
-width:100%;
-height:130px;
-object-fit:cover;
-border-radius:12px;
+box-shadow:0 0 20px rgba(123,47,247,0.4);
 }
 
 .price{
-color:#2e7d32;
+color:#ffd54f;
 font-size:18px;
 font-weight:bold;
-margin-top:8px;
 }
 
-.buy-btn{
+.buy{
 width:100%;
 padding:10px;
-margin-top:8px;
 border:none;
 border-radius:10px;
-background:linear-gradient(90deg,#7b2ff7,#f9a825);
+background:linear-gradient(90deg,#7b2ff7,#ff6a00);
 color:white;
 font-weight:bold;
 cursor:pointer;
+}
+
+/* PROFILE */
+.profile{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,0.1);
 }
 
 /* CHAT */
 .chat{
 height:300px;
 overflow:auto;
-background:white;
+background:#111;
+padding:10px;
 border-radius:12px;
-padding:10px;
-border:1px solid #eee;
 }
 
-.msg{
-margin:5px;
-padding:10px;
-border-radius:10px;
-}
-
-.user{background:#7b2ff7;color:white;text-align:right;}
-.bot{background:#eee;}
-
-.chat-input{
-display:flex;
-gap:10px;
-margin-top:10px;
-}
-
-.chat-input input{
-flex:1;
-padding:10px;
-border-radius:10px;
-border:1px solid #ccc;
-}
-
-.chat-input button{
-padding:10px 15px;
-border:none;
-border-radius:10px;
-background:#f9a825;
-font-weight:bold;
-}
-
-/* PROFILE */
-.profile{
-background:white;
-padding:20px;
-border-radius:14px;
-border:1px solid #eee;
-}
+.msg{padding:8px;margin:5px;border-radius:10px;}
+.user{background:#7b2ff7;text-align:right;}
+.bot{background:#222;}
 </style>
 </head>
 
 <body>
 
-<header>🔥 WELLYFUN SHOP</header>
+<header>🔥 WELLYFUN PREMIUM</header>
 
 <!-- AUTH -->
 <div class="auth" id="auth">
 <div class="auth-box">
 <h3>Регистрация</h3>
-<input id="nick" placeholder="Ник">
-<input id="pass" placeholder="Пароль">
-<button onclick="register()">Войти</button>
+<input id="email" placeholder="Email">
+<input id="nick" placeholder="Ник Minecraft">
+<input id="pass" type="password" placeholder="Пароль">
+<button onclick="register()">Создать аккаунт</button>
 </div>
 </div>
 
-<div class="tabs">
-<button class="tab active" onclick="openTab('home',event)">Главная</button>
-<button class="tab" onclick="openTab('shop',event)">Магазин</button>
-<button class="tab" onclick="openTab('cart',event)">Корзина</button>
-<button class="tab" onclick="openTab('support',event)">Поддержка</button>
-<button class="tab" onclick="openTab('info',event)">Инфо</button>
-<button class="tab" onclick="openTab('profile',event)">Профиль</button>
+<div class="nav">
+<button onclick="openTab('home')">Главная</button>
+<button onclick="openTab('shop')">Магазин</button>
+<button onclick="openTab('cart')">Корзина</button>
+<button onclick="openTab('support')">Поддержка</button>
+<button onclick="openTab('info')">Инфо</button>
+<button onclick="openTab('profile')">Профиль</button>
 </div>
 
 <!-- HOME -->
 <div id="home" class="page active">
-<h1>Добро пожаловать 👋</h1>
-<p>WellyFun SMP-Анархия сервер</p>
+<h1 class="purple">Добро пожаловать 👋</h1>
+<p class="yellow">WellyFun SMP-Анархия</p>
+<p class="orange">Экономика • PvP • Гриф • Кастом чары</p>
 </div>
 
 <!-- SHOP -->
 <div id="shop" class="page">
 
-<div class="category">💜 Привилегии</div>
+<h2 class="purple">🛒 Магазин</h2>
+
 <div class="cards">
 
 <div class="card">
-<img src="https://via.placeholder.com/300x130">
-<h3>VIP</h3>
+<h3 class="yellow">VIP</h3>
+<p>Базовая привилегия</p>
 <div class="price">199₽</div>
-<button class="buy-btn">Купить</button>
+<button class="buy">Купить</button>
 </div>
 
 <div class="card">
-<img src="https://via.placeholder.com/300x130">
-<h3>Босс</h3>
-<div class="price">199₽</div>
-<button class="buy-btn">Купить</button>
+<h3 class="orange">Король</h3>
+<p>Топ привилегия</p>
+<div class="price">599₽</div>
+<button class="buy">Купить</button>
 </div>
 
 <div class="card">
-<img src="https://via.placeholder.com/300x130">
-<h3>Монарх</h3>
-<div class="price">299₽</div>
-<button class="buy-btn">Купить</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/300x130">
-<h3>Король</h3>
-<div
-
-
-lass="price">599₽</div>
-<button class="buy-btn">Купить</button>
+<h3 class="purple">Трапка x10</h3>
+<p>PvP коробка</p>
+<div class="price">79₽</div>
+<button class="buy">Купить</button>
 </div>
 
 </div>
-
-<div class="category">🧩 Ресурсы</div>
-<div class="cards">
-
-<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Алмазы</h3><div class="price">20₽</div><button class="buy-btn">Купить</button></div>
-<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Геплы</h3><div class="price">40₽</div><button class="buy-btn">Купить</button></div>
-<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Тотем</h3><div class="price">30₽</div><button class="buy-btn">Купить</button></div>
-
-</div>
-
-<div class="category">⚔ PvP</div>
-<div class="cards">
-
-<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Трапка x10</h3><div class="price">79₽</div><button class="buy-btn">Купить</button></div>
-<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Nuke</h3><div class="price">99₽</div><button class="buy-btn">Купить</button></div>
-
-</div>
-
-<div class="category">✨ Редкие</div>
-<div class="cards">
-
-<div class="card"><img src="https://via.placeholder.com/300x130"><h3>Талисман Монарха</h3><div class="price">139₽</div><button class="buy-btn">Купить</button></div>
-
-</div>
-
-</div>
-
-<!-- CART -->
-<div id="cart" class="page">
-<h2>Корзина</h2>
-<div id="cartItems"></div>
-
-<h3>💳 Оплата</h3>
-<button class="buy-btn">Карта</button>
-<button class="buy-btn">СБП</button>
-<button class="buy-btn">Crypto</button>
 </div>
 
 <!-- SUPPORT -->
 <div id="support" class="page">
-<h2>Поддержка</h2>
+
+<h2 class="yellow">🆘 Поддержка</h2>
 
 <div class="chat" id="chat">
 <div class="msg bot">Напиши проблему 👇</div>
 </div>
 
-<div class="chat-input">
-<input id="msg">
-<button onclick="sendMsg()">Отправить</button>
-</div>
 </div>
 
 <!-- INFO -->
 <div id="info" class="page">
-<h2>Информация</h2>
-<p>SMP-Анархия</p>
-<p>Экономика + PvP + гриф</p>
-<p>Версия 1.21.11</p>
+<h2 class="orange">📘 Информация</h2>
+
+<p>✔ SMP-Анархия</p>
+<p>✔ Экономика</p>
+<p>✔ PvP / Гриф</p>
+<p>✔ Кастом предметы</p>
+<p>✔ Версия 1.21.11</p>
 </div>
 
 <!-- PROFILE -->
 <div id="profile" class="page">
-<h2>Профиль</h2>
-<p id="userInfo">Не авторизован</p>
+<h2 class="purple">👤 Профиль</h2>
+<div class="profile" id=
+
+
+Box">Не авторизован</div>
 </div>
 
 <script>
 
+let user={};
+
 function register(){
-let nick=document.getElementById("nick").value;
-document.getElementById("userInfo").innerText="Ник: "+nick;
+user.email=document.getElementById("email").value;
+user.nick=document.getElementById("nick").value;
 document.getElementById("auth").style.display="none";
+document.getElementById("profileBox").innerHTML=
+`Email: ${user.email}
+Ник
+user.nick}
+Ста
+ Игрок`;
 }
 
-function openTab(id,event){
+function openTab(id){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
 document.getElementById(id).classList.add("active");
-event.target.classList.add("active");
-}
-
-function sendMsg(){
-let input=document.getElementById("msg");
-if(!input.value) return;
-
-document.getElementById("chat").innerHTML+=
-`<div class="msg user">${input.value}</div>
-<div class="msg bot">Мы ответим скоро 👍</div>`;
-
-input.value="";
 }
 
 </script>
 
 </body>
-</html> c
+</html>"profile
 
 
 
 
-
-Новый интерфейс!Новый интерфейс! Появились папки и фоны. А знаете, что ещё?
-Все
-Непрочитанные
-Архив
-Бизнес-уведомления
-Beastik Be
-Beastik Be
