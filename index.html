@@ -1,101 +1,501 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+<meta charset="UTF-8">
+<title>Мой Minecraft сервер</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f7ff;
+color:#222;
+
+}
+
+/* МЕНЮ */
+
+.menu{
+
+position:sticky;
+top:0;
+z-index:5;
+
+background:white;
+padding:15px;
+
+display:flex;
+justify-content:center;
+gap:15px;
+
+box-shadow:0 3px 15px #ddd;
+
+}
+
+.menu button{
+
+border:0;
+padding:12px 18px;
+
+border-radius:12px;
+
+cursor:pointer;
+
+background:#eeeeff;
+
+transition:.3s;
+
+font-weight:bold;
+
+}
+
+.menu button:hover{
+
+background:#ffd43b;
+
+transform:translateY(-3px);
+
+}
+
+/* СТРАНИЦЫ */
+
+.page{
+
+display:none;
+
+padding:35px;
+
+animation:show .5s;
+
+}
+
+.active{
+
+display:block;
+
+}
+
+@keyframes show{
+
+from{
+
+opacity:0;
+
+transform:translateY(25px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ЗАГОЛОВКИ */
+
+.title{
+
+text-align:center;
+
+font-size:42px;
+
+background:linear-gradient(
+90deg,
+#ff006e,
+#8338ec,
+#3a86ff
+);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+/* КАРТОЧКИ */
+
+.shop{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+}
+
+.card{
+
+background:white;
+
+padding:20px;
+
+border-radius:18px;
+
+text-align:center;
+
+cursor:pointer;
+
+box-shadow:0 5px 20px #ddd;
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:scale(1.05);
+
+box-shadow:0 10px 30px #bbb;
+
+}
+
+/* ЦВЕТА */
+
+.vip{
+
+color:#f1c40f;
+
+}
+
+.king{
+
+color:#9b59b6;
+
+}
+
+.item{
+
+color:#3498db;
+
+}
+
+.price{
+
+font-size:22px;
+
+font-weight:bold;
+
+color:#2ecc71;
+
+margin-top:10px;
+
+}
+
+/* POPUP */
+
+.popup{
+
+display:none;
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.5);
+
+}
+
+.popup-box{
+
+background:white;
+
+width:330px;
+
+margin:120px auto;
+
+padding:25px;
+
+border-radius:20px;
+
+animation:pop .3s;
+
+}
+
+@keyframes pop{
+
+from{
+
+transform:scale(.5);
+
+}
+
+to{
+
+transform:scale(1);
+
+}
+
+}
+
+.close{
+
+background:#ff6b6b;
+
+color:white;
+
+border:0;
+
+padding:10px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+textarea{
+
+width:100%;
+
+height:100px;
+
+border-radius:10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="menu">
+
+<button onclick="openPage('home')">
+🏠 Главная
+</button>
+
+<button onclick="openPage('donate')">
+💎 Донат
+</button>
+
+<button onclick="openPage('support')">
+🆘 Поддержка
+</button>
+
+<button onclick="openPage('info')">
+📘 Инфо
+</button>
+
+</div>
+
+<div id="home" class="page active">
+
+<h1 class="title">
+🔥 Minecraft сервер
+</h1>
+
+<h2 style="text-align:center">
+
+Добро пожаловать!
+
+</h2>
+
+<p style="text-align:center">
+
+⚔ Анархия • 🎁 Ивенты • 💎 Донат • 🚀 Развитие
+
+</p>
+
+</div>
+
 <div id="donate" class="page">
 
 <h1 class="title">
-💎 Магазин
+💎 Донат магазин
 </h1>
 
 <div class="shop">
 
-<!-- ПРИВИЛЕГИИ -->
-
-<div class="card" onclick="buy('VIP','Привилегия VIP','199₽')">
+<div class="card" onclick="buy('VIP','Донат привилегия','199₽')">
 <h2 class="vip">VIP</h2>
-<p>Донат статус</p>
+<p>Статус сервера</p>
 <div class="price">199₽</div>
 </div>
 
-<div class="card" onclick="buy('Босс','Привилегия Босс','199₽')">
+<div class="card" onclick="buy('Босс','Особая привилегия','199₽')">
 <h2 class="king">👑 Босс</h2>
-<p>Особый статус</p>
 <div class="price">199₽</div>
 </div>
 
-<div class="card" onclick="buy('Монарх','Привилегия Монарх','299₽')">
+<div class="card" onclick="buy('Монарх','Продвинутая привилегия','299₽')">
 <h2 class="king">👑 Монарх</h2>
-<p>Расширенные возможности</p>
 <div class="price">299₽</div>
 </div>
 
-<div class="card" onclick="buy('Король','Максимальная привилегия','599₽')">
+<div class="card" onclick="buy('Король','Максимальный статус','599₽')">
 <h2 class="king">🔥 Король</h2>
-<p>Топовый статус</p>
 <div class="price">599₽</div>
 </div>
 
-<!-- РЕСУРСЫ -->
-
-<div class="card" onclick="buy('Стак геплов','Золотые яблоки для игры','40₽')">
-<h2 class="item">🍎 Стак геплов</h2>
+<div class="card" onclick="buy('Стак геплов','Золотые яблоки','40₽')">
+<h2 class="item">🍎 Геплы</h2>
 <div class="price">40₽</div>
 </div>
 
-<div class="card" onclick="buy('Стак алмазов','Алмазы для выживания','20₽')">
-<h2 class="item">💎 Стак алмазов</h2>
+<div class="card" onclick="buy('Стак алмазов','Алмазы','20₽')">
+<h2 class="item">💎 Алмазы</h2>
 <div class="price">20₽</div>
 </div>
 
-<div class="card" onclick="buy('Зачарованные геплы','16 зачарованных золотых яблок','59₽')">
-<h2 class="vip">✨ Геплы x16</h2>
+<div class="card" onclick="buy('Геплы x16','Зачарованные геплы','59₽')">
+<h2 class="vip">✨ Геплы</h2>
 <div class="price">59₽</div>
 </div>
 
-<!-- ОРУЖИЕ -->
-
 <div class="card" onclick="buy('Nuke','Орбитальная пушка','99₽')">
 <h2 class="item">💣 Nuke</h2>
-<p>Кастомное оружие</p>
 <div class="price">99₽</div>
 </div>
 
-<!-- ТРАПКИ -->
-
-<div class="card" onclick="buy('Трапка','10 штук трапок','79₽')">
-<h2 class="item">🧱 Трапка x10</h2>
+<div class="card" onclick="buy('Трапка x10','10 трапок','79₽')">
+<h2 class="item">🧱 Трапка</h2>
 <div class="price">79₽</div>
 </div>
 
-<div class="card" onclick="buy('Пласт','10 штук пластов','69₽')">
-<h2 class="item">🧱 Пласт x10</h2>
+<div class="card" onclick="buy('Пласт x10','10 пластов','69₽')">
+<h2 class="item">🧱 Пласт</h2>
 <div class="price">69₽</div>
 </div>
 
-<!-- ШАБЛОНЫ -->
+<div class="card" onclick="buy('Шаблоны тишины x8','8 шаблонов','49₽')
 
-<div class="card" onclick="buy('Шаблоны тишины','8 шаблонов тишины','49₽')">
-<h2 class="vip">🧩 Шаблоны тишины x8</h2>
+
+class="item">🧩 Шаблоны</h2>
 <div class="price">49₽</div>
 </div>
 
-<div class="card" onclick="buy('Шаблон незеритового улучшения','Шаблон для улучшения брони','49₽')">
-<h2 class="item">🧩 Незеритовый шаблон</h2>
+<div class="card" onclick="buy('Незеритовый шаблон','Улучшение брони','49₽')">
+<h2 class="item">🧩 Незерит</h2>
 <div class="price">49₽</div>
 </div>
 
-<!-- ПРЕДМЕТЫ -->
-
-<div class="card" onclick="buy('Тотем бессмертия','Особый предмет защиты','30₽')">
+<div class="card" onclick="buy('Тотем бессмертия','Защитный предмет','30₽')">
 <h2 class="vip">🟢 Тотем</h2>
 <div class="price">30₽</div>
 </div>
 
-<div class="card" onclick="buy('Талисман Монарха','Редкий донат предмет','139₽')">
-<h2 class="king">✨ Талисман Монарха</h2>
+<div class="card" onclick="buy('Талисман Монарха','Редкий предмет','139₽')">
+<h2 class="king">✨ Талисман</h2>
 <div class="price">139₽</div>
 </div>
 
 </div>
 
 </div>
+
+<div id="support" class="page">
+
+<h1 class="title">
+🆘 Поддержка
+</h1>
+
+<p>
+Discord: твоя ссылка
+</p>
+
+<textarea placeholder="Опишите проблему"></textarea>
+
+</div>
+
+<div id="info" class="page">
+
+<h1 class="title">
+📘 Информация
+</h1>
+
+<p>
+Версия сервера: 1.21
+</p>
+
+<p>
+Режим: Анархия
+</p>
+
+</div>
+
+<div class="popup" id="popup">
+
+<div class="popup-box">
+
+<h2 id="pname"></h2>
+
+<p id="pdesc"></p>
+
+<h2 id="pprice"></h2>
+
+<button class="close" onclick="closePopup()">
+
+Закрыть
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function openPage(id){
+
+document.querySelectorAll(".page")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById(id)
+.classList.add("active");
+
+}
+
+function buy(name,desc,price){
+
+document.getElementById("pname")
+.innerHTML=name;
+
+document.getElementById("pdesc")
+.innerHTML=desc;
+
+document.getElementById("pprice")
+.innerHTML=price;
+
+document.getElementById("popup")
+.style.display="block";
+
+}
+
+function closePopup(){
+
+document.getElementById("popup")
+.style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>">
+<h2
+
+
+
 
 
 
