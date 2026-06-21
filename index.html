@@ -3,74 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Донат-магазин</title>
+<title>WellyFun Shop</title>
 
 <style>
 body{
 margin:0;
 font-family:Arial;
-background:#f5f5f5;
+background:#f7f8fc;
 color:#111;
-font-size:18px;
 }
 
-/* MENU */
-.menu{
+/* HEADER */
+header{
+background:white;
+padding:22px;
+text-align:center;
+font-size:30px;
+font-weight:bold;
+border-bottom:1px solid #eee;
+animation:fadeDown 0.5s ease;
+}
+
+/* TABS */
+.tabs{
 display:flex;
+flex-wrap:wrap;
 justify-content:center;
 gap:10px;
 padding:15px;
 }
 
-.menu button{
+.tab{
 padding:12px 16px;
-border:none;
-border-radius:10px;
 background:white;
+border:1px solid #eee;
+border-radius:12px;
 cursor:pointer;
 transition:0.3s;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
-.menu button:hover{
-transform:scale(1.05);
+.tab:hover{
+transform:scale(1.06);
 }
 
-.page{display:none;padding:20px;}
-.page.active{display:block;}
+.tab.active{
+background:#111;
+color:white;
+}
+
+/* PAGES */
+.page{
+display:none;
+padding:20px;
+animation:fadeIn 0.4s ease;
+}
+
+.page.active{
+display:block;
+}
+
+/* CARDS */
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:15px;
+}
 
 /* CARD */
 .card{
 background:white;
 padding:15px;
-border-radius:12px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-margin:10px 0;
+border-radius:14px;
+border:1px solid #eee;
 cursor:pointer;
 transition:0.3s;
+animation:popIn 0.4s ease;
 }
 
 .card:hover{
-transform:translateY(-5px);
+transform:translateY(-7px) scale(1.02);
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* TITLES */
-.item{color:#444;}
-.vip{color:#2e7d32;}
-.king{color:#f9a825;}
-
-/* PRICE */
 .price{
-color:#1b5e20;
+color:green;
 font-weight:bold;
-margin-top:5px;
+margin-top:8px;
+font-size:18px;
 }
 
-/* BUY BUTTON */
+/* BUTTON */
 .buy-btn{
 margin-top:10px;
-padding:10px;
 width:100%;
+padding:11px;
 border:none;
 border-radius:10px;
 background:#111;
@@ -81,6 +107,7 @@ transition:0.3s;
 
 .buy-btn:hover{
 background:#333;
+transform:scale(1.05);
 }
 
 /* POPUP */
@@ -90,31 +117,34 @@ position:fixed;
 top:0;left:0;
 width:100%;height:100%;
 background:rgba(0,0,0,0.5);
+animation:fadeBg 0.3s ease;
 }
 
 .popup-box{
 background:white;
-width:350px;
+width:380px;
 margin:120px auto;
 padding:20px;
-border-radius:12px;
+border-radius:14px;
 text-align:center;
+animation:popupIn 0.4s ease;
 }
 
 /* CHAT */
 .chat{
 background:white;
-padding:15px;
-border-radius:12px;
 height:300px;
 overflow:auto;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
+padding:15px;
+border-radius:12px;
+border:1px solid #eee;
 }
 
 .msg{
 margin:8px 0;
 padding:10px;
 border-radius:10px;
+animation:msgIn 0.3s ease;
 }
 
 .user{background:#111;color:white;text-align:right;}
@@ -140,52 +170,128 @@ background:#111;
 color:white;
 border-radius:10px;
 cursor:pointer;
+transition:0.3s;
 }
+
+.chat-input button:hover{
+transform:scale(1.05);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes popIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes popupIn{from{opacity:0;transform:scale(0.9) translateY(30px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes fadeBg{from{opacity:0}to{opacity:1}}
+@keyframes msgIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
 </style>
 </head>
 
 <body>
 
-<!-- MENU -->
-<div class="menu">
-<button onclick="openPage('shop')">Магазин</button>
-<button onclick="openPage('support')">Поддержка</button>
-<button onclick="openPage('info')">Инфо</button>
+<header>🔥 WellyFun Shop</header>
+
+<div class="tabs">
+<div class="tab active" onclick="openTab('home',event)">Главная</div>
+<div class="tab" onclick="openTab('shop',event)">Магазин</div>
+<div class="tab" onclick="openTab('cart',event)">Корзина</div>
+<div class="tab" onclick="openTab('support',event)">Поддержка</div>
+<div class="tab" onclick="openTab('info',event)">Инфо</div>
+<div class="tab" onclick="openTab('account',event)">ЛК</div>
+</div>
+
+<!-- HOME -->
+<div id="home" class="page active">
+<h2>Добро пожаловать на WellyFun 🚀</h2>
+<p>SMP-Анархия сервер с экономикой, PvP и кастом предметами.</p>
 </div>
 
 <!-- SHOP -->
-<div id="shop" class="page active">
+<div id="shop" class="page">
+<div class="cards">
 
-<div class="card" onclick="buy('Шаблоны тишины','Редкий ресурс для крафта','49₽')">
-<h2 class="item">🧩 Шаблоны</h2>
-<div class="price">49₽</div>
-<button class="buy-btn">Купить</button>
+<div class="card">
+<h3>VIP</h3>
+<div class="price">199₽</div>
+<button class="buy-btn" onclick="buy('VIP','Базовая привилегия','199₽')">Купить</button>
 </div>
 
-<div class="card" onclick="buy('Незеритовый шаблон','Улучшение брони','49₽')">
-<h2 class="item">🧩 Незерит</h2>
-<div class="price">49₽</div>
-<button class="buy-btn">Купить</button>
+<div class="card">
+<h3>Босс</h3>
+<div class="price">199₽</div>
+<button class="buy-btn" onclick="buy('Босс','Усиленная привилегия','199₽')">Купить</button>
 </div>
 
-<div class="card" onclick="buy('Тотем бессмертия','Защитный предмет','30₽')">
-<h2 class="vip">🟢 Тотем</h2>
+<div class="card">
+<h3>Монарх</h3>
+<div class="price">299₽</div>
+<button class="buy-btn" onclick="buy('Монарх','Средний донат','299₽')">Купить<
+
+
+on>
+</div>
+
+<div class="card">
+<h3>Король</h3>
+<div class="price">599₽</div>
+<button class="buy-btn" onclick="buy('Король','Топ донат','599₽')">Купить</button>
+</div>
+
+<div class="card">
+<h3>Трапка x10</h3>
+<div class="price">79₽</div>
+<button class="buy-btn" onclick="buy('Трапка x10','PvP коробка из обсидиана','79₽')">Купить</button>
+</div>
+
+<div class="card">
+<h3>Нuke</h3>
+<div class="price">99₽</div>
+<button class="buy-btn" onclick="buy('Nuke','Мощное разрушение базы','99₽')">Купить</button>
+</div>
+
+<div class="card">
+<h3>Пласт x10</h3>
+<div class="price">69₽</div>
+<button class="buy-btn" onclick="buy('Пласт x10','Ловушки и защита','69₽')">Купить</button>
+</div>
+
+<div class="card">
+<h3>Тотем</h3>
 <div class="price">30₽</div>
-<button class="buy-btn">Купить</button>
+<button class="buy-btn" onclick="buy('Тотем','Спасает от смерти','30₽')">Купить</button>
 </div>
 
-<div class="card" onclick="buy('Талисман Монарха','Редкий предмет','139₽')">
-<h2 class="king">✨ Талисман</h2>
+<div class="card">
+<h3>Алмазы</h3>
+<div class="price">20₽</div>
+<button class="buy-btn" onclick="buy('Алмазы','Экономика сервера','20₽')">Купить</button>
+</div>
+
+<div class="card">
+<h3>Геплы</h3>
+<div class="price">40₽</div>
+<button class="buy-btn" onclick="buy('Геплы','Выживание PvP','40₽')">Купить</button>
+</div>
+
+<div class="card">
+<h3>Талисман Монарха</h3>
 <div class="price">139₽</div>
-<button class="buy-btn">Купить</button>
+<button class="buy-btn" onclick="buy('Талисман','Редкий предмет','139₽')">Купить</button>
 </div>
 
+</div>
+</div>
+
+<!-- CART -->
+<div id="cart" class="page">
+<h2>🛒 Корзина</h2>
+<div id="cartItems"></div>
 </div>
 
 <!-- SUPPORT -->
 <div id="support" class="page">
 
-<h1>🆘 Поддержка</h1>
+<h2>🆘 Поддержка</h2>
 
 <div class="chat" id="chat">
 <div class="msg bot">Привет! Напиши проблему 👇</div>
@@ -200,45 +306,61 @@ cursor:pointer;
 
 <!-- INFO -->
 <div id="info" class="page">
-
-<h1>📘 Информация</h1>
-
-<p><b>Версия:</b> 1.21.11</p>
+<h2>📘 Информация</h2>
 <p><b>Режим:</b> SMP-Анархия</p>
 <p>Есть аукцион</p>
 <p>Своя экономика</p>
-<p>Можно драться и гриферить</p>
-<p>Кастомные предметы и чары</p>
-<p>Регулярный вайп</p>
-<p>Скоро обновления!</p>
+<p>Можно гриферить и PvP</p>
+<p>Кастом предметы и чары</p>
+<p>Версия: 1.21.11</p>
+<p>Регулярные вайпы</p>
+<p>Скоро обновления 🚀</p>
+</div>
 
+<!-- ACCOUNT -->
+<div id="account" class="page">
+<h2>👤 Личный кабинет</h2>
+<p>Здесь будет статистика, донат и привилегии игрока.</p>
 </div>
 
 <!-- POPUP -->
 <div class="popup" id="popup">
 <div class="popup-box">
-<h2 id="pname"></h2>
+<h3 id="pname"></h3>
 <p id="pdesc"></p>
-<h2 id="pprice"></h2>
-<button onclick="closePopup()" class="buy-btn">Закрыть</button>
+<h3 id="pprice"></h3>
+
+<button class="buy-btn" onclick="addToCart()">Добавить в корзину</button>
+<button class="buy-btn" onclick="closePopup()">Закрыть</button>
 </div>
 </div>
 
 <script>
 
-function openPage(id){
+let currentItem={};
+
+function openTab(id,event){
 document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
 document.getElementById(id).classList.add("active");
+event.target.classList.add("active");
 }
 
 function buy(name,desc,price){
+currentItem={name,desc,price};
 document.getElementById("pname").innerText=name;
 document.getElementById("pdesc").innerText=desc;
-document
-
-
-d("pprice").innerText=price;
+document.getElementById("pprice").innerText=price;
 document.getElementById("popup").style.display="block";
+}
+
+function addToCart(){
+let cart=document.getElementById("cartItems");
+cart.innerHTML+=`
+<div style="background:white;padding:10px;border-radius:10px;margin:8px 0;border:1px solid #eee">
+<b>${currentItem.name}</b> — ${currentItem.price}
+</div>`;
+alert("Добавлено в корзину");
 }
 
 function closePopup(){
@@ -261,7 +383,7 @@ chat.scrollTop=chat.scrollHeight;
 </script>
 
 </body>
-</html>.getElementByI
+</html>/butt
 
 
 
